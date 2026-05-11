@@ -1,0 +1,200 @@
+/* --- 1. Reseteo Básico y Global --- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Montserrat, sans-serif;
+}
+
+:root {
+  --black:#000000;
+  --white:#ffffff;
+  --dark-purple: #3c122c;
+  --medium-purple: #762ba3;
+  --light-purple: #ae40f0;
+  --yellow: #ffc800;
+  --pink: #fc5185;
+  --light-pink: #ffeffe;
+  --green: #00b090;
+  --background-gray: #eee;
+  --color :#dc3545;
+}
+
+/* CONTENEDOR PRINCIPAL */
+#header {
+    background: #fff;
+    border-bottom: solid 1px #e3e3e3;
+    box-shadow: 0px 2px 11px 0px rgba(61, 57, 57, 0.17);
+}
+
+/* BARRA ROSADA (SUPERIOR) */
+.header-nav {
+    display: flex;
+    background: #f8d9d6;
+    border-bottom: solid 1px #cfcfcf;
+    padding-top: 0.3rem;
+    padding-bottom: 0.3rem;
+    font-size: 1.06667rem;
+}
+
+.header-nav ul {
+    display: flex;
+    list-style: none;
+    margin-left: 6rem;
+    padding: 0;
+}
+.header-nav ul li a{
+    color: #fff;
+    text-decoration: none;
+
+    .fa-instagram{
+      font-size: 1.5rem;
+      display: inline-block;
+      color: #fff;
+    }
+}
+.header-nav ul li .contact{
+    margin-left: -5rem;
+    }
+
+
+/* FRANJA BLANCA (LOGO Y CENTRO) */
+.header-top {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 20px;
+    align-items: center;  /* Asegura que todo esté centrado mientras encoge */
+}
+
+.logo-header { 
+  margin-left: 3rem;
+  flex: 0 0 250px;
+
+  img{
+    width: 230px ;
+  }
+ }
+
+
+.header-center { 
+  flex: 1; 
+  text-align: center; 
+  padding: 0 15px; 
+  text-align: center;
+  color: #777;
+  font-size: 13px;
+}
+.envio-info p img{
+     vertical-align: middle;
+}
+.buscar-nav{
+  width: 100%;  /* El contenedor padre ocupa todo el espacio central */
+  display: flex;
+  justify-content: center;
+}
+.buscar-form {
+    position: relative;
+    width: 80%;
+    max-width: 300px; /* <--- Esto evita que sea gigante a lo ancho */
+    display: flex;
+    align-items: center;
+}
+
+.form-control {
+    width: 100%;
+    /* Reducimos el primer número (0.5rem) para que sea menos alta */
+    padding: 0.5rem 2.5rem 0.5rem 1rem; 
+    font-size: 13px; /* Texto más pequeño dentro */
+    box-sizing: border-box;
+    border: 1px solid #eb958d;
+    border-radius: 20px; /* Bordes redonditos finos */
+}
+
+.buscar-btn {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 2.5rem; /* Reducimos un poco el ancho del botón */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 5;
+}
+.buscar-btn i {
+    color: #777;
+    font-size: 0.9rem; /* <--- Lupa más pequeña */
+}
+
+
+    
+.header-right {
+    flex: 0; 
+    display: flex;
+    justify-content: flex-end; /* Los lleva al final de la derecha */
+    align-items: center;       /* Los centra verticalmente */
+    gap: 40px;                 /* Espacio entre el bloque de cuenta y el de carrito */
+    margin-right: 5rem;
+}
+
+.header-right a {
+    display: flex;
+    flex-direction: column; /* <--- Pone el icono arriba y el texto abajo */
+    align-items: center;       /* Centra el icono con el texto */
+    text-decoration: none;     /* Quita el subrayado azul */
+}
+
+.header-right a img {
+    width: 3.5rem;               
+    height: auto;
+}
+
+.header-right a .title {
+    font-size: 15px;
+    font-weight: 500;
+    color: #777777;
+    white-space: nowrap;    /* <--- ¡ESTO EVITA QUE EL TEXTO SE ROMPA EN DOS LÍNEAS! */
+    
+}
+
+
+/* NAVEGACIÓN INFERIOR (LA QUE SOBRESALE) */
+.nav-inferior {
+    display: flex;
+    justify-content: center;
+    background-color: #fff;
+    padding-bottom: 1rem;
+}
+
+.nav-inferior ul {
+    display: flex;
+    gap: 30px;
+    list-style: none;
+    background: #fff;
+    padding: 1rem 2.5rem;
+    border-radius: 8px;
+    box-shadow: 0px 5px 15px rgba(0,0,0,0.1);
+    margin-top: -5px; /* Efecto pisado */
+}
+
+.nav-inferior ul li a {
+    text-decoration: none;
+    color: #333;
+    font-size: 20px;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.nav-inferior ul li a span:hover {
+color:#eb958d;
+}
+
+body {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100vh;
+}

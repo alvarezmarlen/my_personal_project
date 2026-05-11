@@ -1,0 +1,250 @@
+#banner-estrellas {
+  position: relative; /* Importante para que las estrellas no se escapen */
+  width: 100%;
+  height: 250px;      /* Dale la altura que quieras para el banner */
+  display: flex;
+  justify-content: center; /* Centrado horizontal */
+  align-items: center;
+  background: #ffa17f;
+  background: -webkit-linear-gradient(to right, #00223e, #ffa17f);
+  background: linear-gradient(to right, #00223e, #ffa17f);
+  overflow: hidden;    /* AQUÍ sí ponemos el hidden para cortar las estrellas */
+}
+
+#universe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.star0 {
+  height: 1px;
+  width: 1px;
+  opacity: 1;
+  position: absolute;
+}
+
+.star1 {
+  height: 2px;
+  width: 2px;
+  border-radius: 50%;
+  opacity: 1;
+  position: absolute;
+}
+
+.star2 {
+  height: 3px;
+  width: 3px;
+  border-radius: 50%;
+  opacity: 1;
+  position: absolute;
+}
+
+.star3 {
+  height: 4px;
+  width: 4px;
+  border-radius: 50%;
+  opacity: 1;
+  position: absolute;
+}
+
+
+.titulo-banner{
+    max-width: 40rem;
+    padding: 0.5rem;
+    border-radius: 2rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    margin: -5rem auto 0 auto;
+}
+
+/* -----------------------------------------------------------------
+SEGUNDA PARTE DE MI PAGINA PRINCIPAL
+--------------------------------------------------------------------*/
+/* 1. Contenedor principal */
+.mosaico-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    padding: 60px 20px;
+    background-color: #fffafb;
+}
+
+/* 2. La Tarjeta (Caja con la foto) */
+.mosaico-container a {
+    position: relative;
+    text-decoration: none;
+    width: 380px;  /* La hacemos un poco más ancha para que luzca más */
+    height: 380px; /* Cuadrada perfecta */
+    border-radius: 4px; /* Bordes menos redondeados, más elegantes como en Bisuka */
+    overflow: hidden;
+    display: block;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: transform 0.4s ease;
+}
+
+.mosaico-container a:hover {
+    transform: scale(1.03);
+}
+
+/* 3. La Imagen */
+.mosaico-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* 4. LA ETIQUETA  */
+.etiqueta-contenedor {
+    position: absolute;
+    top: 90%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 255, 255, 0.92);
+    border: 1px solid #c0c0c0;  /* Línea exterior */
+    outline: 1px solid #c0c0c0; /* Línea interior */
+    outline-offset: -6px;       /* Separación entre las dos líneas */
+    
+    /* AJUSTE PARA UNA SOLA LÍNEA */
+    padding: 15px 25px;         /* Espacio arriba/abajo y a los lados */
+    min-width: 280px;           /* Suficientemente ancha para "Colgantes para móvil" */
+    white-space: nowrap;        /* Obliga al texto a quedarse en una sola línea */
+    text-align: center;
+}
+
+.etiqueta-contenedor h3 {
+    margin: 0;
+    color: #333;
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 0.9rem;          /* Un poco más pequeña para que quepa bien */
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 3px;        /* Espaciado elegante entre letras */
+}
+
+
+
+
+
+
+/* Ajuste para los Favoritos */
+.favoritos {
+    padding: 80px 20px;
+    background-color: #ffffff;
+    text-align: center;
+}
+
+.titulo-seccion {
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    font-size: 1.2rem;
+    margin-bottom: 50px;
+    color: #333;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.favoritos-grid {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.producto-mini {
+    width: 280px; /* Un poco más grandes para que se vean bien las piedritas */
+    transition: transform 0.3s ease;
+}
+
+.producto-mini:hover {
+    transform: translateY(-5px); /* Pequeño salto al pasar el ratón */
+}
+
+.producto-mini img {
+    width: 100%;
+    height: 320px;
+    object-fit: cover;
+    /* BORDE ESTILO CUADRO */
+    border: 1px solid #d1d1d1; 
+    padding: 8px;
+    background-color: white;
+    margin-bottom: 20px;
+}
+
+.producto-mini h5 {
+    font-family: 'Segoe UI', sans-serif;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+    color: #222;
+}
+
+.producto-mini span {
+    color: #888;
+    font-weight: 300;
+    font-size: 0.9rem;
+}
+
+/* Ajuste para Detalles Artesanales para que respire */
+.detalles-artesanales {
+    background-color: #fffafb; /* Fondo muy clarito para separar secciones */
+    border-top: 1px solid #eee;
+}
+
+
+
+
+
+/*--------------------------------------------------------------------------------
+ Contenedor de la sección debajo del mosaico
+ ------------------------------------------------------------------------------*/
+.detalles-artesanales {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: flex-start;
+    padding: 60px 20px;
+    background-color: #ffffff; /* Fondo blanco para que resalte tras el mosaico rosa */
+    gap: 40px;
+}
+
+/* Cada uno de los tres bloques */
+.valor-item {
+    flex: 1;
+    min-width: 250px;
+    max-width: 320px;
+    text-align: center;
+}
+
+/* Estilo para los iconos (emojis o iconos pequeños) */
+.icono-artesano {
+    font-size: 2.5rem;
+    display: block;
+    margin-bottom: 20px;
+}
+
+/* Títulos de los valores */
+.valor-item h4 {
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #333;
+    margin-bottom: 15px;
+    font-weight: 500;
+}
+
+/* Textos explicativos */
+.valor-item p {
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: #666;
+    padding: 0 10px;
+}
