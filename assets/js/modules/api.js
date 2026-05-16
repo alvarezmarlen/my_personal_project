@@ -4,7 +4,7 @@ export async function obtenerDatos(url) {
         const respuesta = await fetch(url);
         if (!respuesta.ok) {
             throw new Error(`Error al cargar: ${respuesta.status}`);
-        }
+        } 
         return await respuesta.json();
     } catch (error) {
         console.error("Hubo un problema con la petición:", error);

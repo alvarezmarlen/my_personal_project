@@ -4,18 +4,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Marlen Alvarez"/>
-    <meta name="description" content="Bellas prendas artesanales, para usar cada dia, luciendo elegante, bella y juvenil">
+    <meta name="description" content="Bellas prendas artesanales, para usar cada dia, luciendo elegante, bella y juvenil, regala con satisfaccion y acierto">
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'><script src="https://kit.fontawesome.com/384e83612b.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="assets/css/style.css">
     <title>Store Sumi.chh</title>
 </head>
 <body>
+<!------------------COMPONENTE DEL NAVEGADOR-----------------------------------------> 
     <div id="nav-placeholder"></div>
 
-    <main></main>
+    
+<!------------------COMIENZA NUESTRO MAIN-----------------------------------------> 
+    <main>
+        <!--   El Banner de las Estrella        -->
+        <section id="banner-estrellas">
+            <div id="universe"></div>
+            <h1 class="titulo-banner">Dale un toque especial a tu look diario</h1>
+        </section>
 
+        <!-- Aqui tenemos la seccion con las fotos de las categorias -->
+        <section id="categoria-container"></section>
+
+        
+        <!-- Aqui tenemos la Seccion de los favoritos de la semana -->
+        <section class="favoritos">
+            <h2 class="titulo-seccion">Tus favoritos de esta semana</h2>
+            <div class="favoritos-grid" id="favoritos-container"></div>
+        </section>
+
+        <!-- Aqui tenemos la seccion DETALLES-->
+        <section class="detalles-artesanales">
+            <div class="valor-item">
+                <span class="icono-artesano">🪡</span>
+                <h4>Hecho a mano</h4>
+                <p>Cada mostacilla es enfilada una a una con nylon de alta resistencia.</p>
+            </div>
+            <div class="valor-item">
+                <span class="icono-artesano">🎨</span>
+                <h4>Diseños Únicos</h4>
+                <p>Combinamos piedritas y amuletos para que no haya dos piezas iguales.</p>
+            </div>
+            <div class="valor-item">
+                <span class="icono-artesano">🎁</span>
+                <h4>Listo para Regalar</h4>
+                <p>Cuidamos el packaging para que la experiencia sea mágica desde que abres el sobre.</p>
+            </div>
+        </section>
+    </main>
+
+<!------------------COMPONENTE DEL FOOTER-----------------------------------------> 
     <div id="footer-placeholder"></div>
     
+    <script src="assets/js/modules/banner.js"></script>
     <script type="module" src="assets/js/main.js"></script>
 </body>
 </html>

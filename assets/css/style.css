@@ -1,3 +1,26 @@
+/* --- 1. Reseteo Básico y Global --- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Montserrat, sans-serif;
+}
+
+:root {
+  --primary:#f8d9d6;
+  --black:#000000;
+  --white:#ffffff;
+  --dark-purple: #3c122c;
+  --medium-purple: #762ba3;
+  --light-purple: #ae40f0;
+  --yellow: #ffc800;
+  --pink: #fc5185;
+  --light-pink: #ffeffe;
+  --green: #00b090;
+  --background-gray: #eee;
+  --color :#dc3545;
+}
+
 #banner-estrellas {
   position: relative; /* Importante para que las estrellas no se escapen */
   width: 100%;
@@ -163,6 +186,8 @@ SEGUNDA PARTE DE MI PAGINA PRINCIPAL
 
 .producto-mini:hover {
     transform: translateY(-5px); /* Pequeño salto al pasar el ratón */
+    background-color: var(--primary);
+    border-radius: 0.5rem;
 }
 
 .producto-mini img {
@@ -190,6 +215,10 @@ SEGUNDA PARTE DE MI PAGINA PRINCIPAL
     font-weight: 300;
     font-size: 0.9rem;
 }
+.favoritos a{
+   text-decoration: none;
+}
+
 
 /* Ajuste para Detalles Artesanales para que respire */
 .detalles-artesanales {

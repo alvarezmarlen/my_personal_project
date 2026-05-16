@@ -5,6 +5,7 @@
   font-family: Montserrat, sans-serif;
 }
 :root {
+  --primary:#f8d9d6;
   --black:#000000;
   --white:#ffffff;
   --dark-purple: #3c122c;
@@ -21,7 +22,7 @@
 footer{
     display: grid;
     grid-template-columns: 1fr 2fr 1fr;
-    background-color: #ffd5d5;
+    background-color: var(--primary);
     border-bottom: solid 1px #cfcfcf;
     border-top: solid 1px #cfcfcf;
   }

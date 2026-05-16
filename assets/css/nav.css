@@ -7,6 +7,7 @@
 }
 
 :root {
+  --primary:#f8d9d6;
   --black:#000000;
   --white:#ffffff;
   --dark-purple: #3c122c;
@@ -30,7 +31,7 @@
 /* BARRA ROSADA (SUPERIOR) */
 .header-nav {
     display: flex;
-    background: #f8d9d6;
+    background: var(--primary);
     border-bottom: solid 1px #cfcfcf;
     padding-top: 0.3rem;
     padding-bottom: 0.3rem;
