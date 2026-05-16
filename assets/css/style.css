@@ -74,15 +74,20 @@
 
 
 .titulo-banner{
-    max-width: 40rem;
-    padding: 0.5rem;
+    max-width: 48rem;
+    padding: 0.8rem 2rem;
     border-radius: 2rem;
-    background-color: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15); 
+    border: 1px solid rgba(255, 255, 255, 0.15);
     margin: -5rem auto 0 auto;
+    letter-spacing: 4px;
+    font-weight: 400;
+    text-transform: uppercase;
+    color: #ffffff;
+    text-align: center;
 }
 
 /* -----------------------------------------------------------------
@@ -182,11 +187,24 @@ SEGUNDA PARTE DE MI PAGINA PRINCIPAL
 .producto-mini {
     width: 280px; /* Un poco más grandes para que se vean bien las piedritas */
     transition: transform 0.3s ease;
+    padding: 10px 10px 18px 10px;
 }
 
 .producto-mini:hover {
-    transform: translateY(-5px); /* Pequeño salto al pasar el ratón */
-    background-color: var(--primary);
+transform: translateY(-7px); /* Sube un pelín más para dar más sensación de flotado */
+    
+    /* 🎯 UN CRISTAL ROSA PASTEL: Cambiamos a tu rosa (--primary o --pink) pero muy translúcido (0.12) */
+    background-color: rgba(248, 217, 214, 0.12); 
+    
+    /* El desenfoque lo dejamos igual, que funciona genial */
+    backdrop-filter: blur(8px);                 
+    -webkit-backdrop-filter: blur(8px);
+    
+    /* 🎯 SOMBRA MÁS MARCADA: Subimos la opacidad a 0.22 para que levante la tarjeta */
+    box-shadow: 0 12px 30px rgba(252, 81, 133, 0.22); 
+    
+    /* 🎯 BORDE DEFINIDO: Le damos un toque rosa/blanco que encuadre el cristal */
+    border: 1px solid rgba(252, 81, 133, 0.3); 
     border-radius: 0.5rem;
 }
 
@@ -277,3 +295,4 @@ SEGUNDA PARTE DE MI PAGINA PRINCIPAL
     color: #666;
     padding: 0 10px;
 }
+

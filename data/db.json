@@ -310,10 +310,10 @@
         }
     ],
   "mosaico": [
-        { "categoria": "Pendientes", "imagen": "assets/img/catalogo/pendientesCrucifijos1.png", "enlace": "pages/productos.html"},
-        { "categoria": "Collares", "imagen": "assets/img/catalogo/CollarFrutilla-abalorios02.png", "enlace": "pages/productos.html"},
-        { "categoria": "Pulseras", "imagen": "assets/img/catalogo/PulseraCruz01.png", "enlace": "pages/productos.html"},
-        { "categoria": "Colgantes para móvil", "imagen": "assets/img/catalogo/ColganteMovil-Murcielago8.png", "enlace": "pages/productos.html"},
-        { "categoria": "Llaveros", "imagen": "../assets/img/catalogo/LlaveroPucca01.png", "enlace": "pages/productos.html"}
+        { "categoria": "Pendientes", "imagen": "assets/img/catalogo/pendientesCrucifijos1.png", "enlace": "pages/productos.html?categoria=Pendientes"},
+        { "categoria": "Collares", "imagen": "assets/img/catalogo/CollarFrutilla-abalorios02.png", "enlace": "pages/productos.html?categoria=Collares"},
+        { "categoria": "Pulseras", "imagen": "assets/img/catalogo/PulseraCruz01.png", "enlace": "pages/productos.html?categoria=Pulseras"},
+        { "categoria": "Colgantes para móvil", "imagen": "assets/img/catalogo/ColganteMovil-Murcielago8.png", "enlace": "pages/productos.html?categoria=Colgantes para móvil"},
+        { "categoria": "Llaveros", "imagen": "../assets/img/catalogo/LlaveroPucca01.png", "enlace": "pages/productos.html?categoria=Llaveros"}
     ]
 }

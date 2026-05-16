@@ -1,4 +1,4 @@
-//CODIGO QUE RENDERIZA AL NAV Y EL FOOTER
+//1. CODIGO QUE RENDERIZA AL NAV Y EL FOOTER
 export async function cargarComponentes(idContenedor, rutaArchivo) {
     try {
         const respuesta = await fetch(rutaArchivo);
@@ -16,7 +16,7 @@ export async function cargarComponentes(idContenedor, rutaArchivo) {
 }
 
 /* ---------------------------------------------------------
-            PINTAR LAS CATEGORIAS EN EL INICIO
+   2. PINTAR LAS CATEGORIAS EN EL INICIO
 -----------------------------------------------------------*/
 export function mostrarCategorias(listaCategorias, idCategorias) {
     const contenedor = document.getElementById(idCategorias);
@@ -43,7 +43,7 @@ export function mostrarCategorias(listaCategorias, idCategorias) {
 
 
 /* ---------------------------------------------------------
-        PINTAR FAVORITOS EN EL INICIO
+   3.  PINTAR FAVORITOS EN EL INICIO
 -----------------------------------------------------------*/
 export function mostrarMasVisitados(listaProductos, idContenedor) {
     const contenedor = document.getElementById(idContenedor);
@@ -76,14 +76,14 @@ export function mostrarMasVisitados(listaProductos, idContenedor) {
 }
 
 /* ---------------------------------------------------------
-            PINTAR LAS TARJETAS DE PRODUCTOS 
+    4. PINTAR LAS TARJETAS DE PRODUCTOS 
 -----------------------------------------------------------*/
 export function mostrarProductos(listaProductos, contenedorId) {
     const contenedor = document.getElementById(contenedorId);
     contenedor.innerHTML = ""; // Limpiamos por si hay algo antes
 
     listaProductos.forEach(producto => {
-    const card = document.createElement('div');
+    const card = document.createElement('a');
     card.classList.add('producto-card');
 
     card.innerHTML = `
@@ -93,7 +93,7 @@ export function mostrarProductos(listaProductos, contenedorId) {
         <div class="producto-info">
             <h3>${producto.productName}</h3>
               <p class="precio">${producto.precio}€</p>
-            <button class="btn-comprar" data-id="${producto.id}">Añadir al Carrito</button>
+            <button class="btn-comprar" data-id="${producto.id}">Añadir a la cesta</button>
         </div>
     `;
         contenedor.appendChild(card);

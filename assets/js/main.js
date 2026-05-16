@@ -39,7 +39,18 @@ document.addEventListener('DOMContentLoaded', inicializarPagina);
 async function cargarSeccionProductos() {
         try {
             const datos = await obtenerDatos('../data/db.json');
-            mostrarProductos(datos.productos, 'container-productos');
+
+            // 1. Detectar si hay una categoría específica en la URL 🔍
+            const parametros = new URLSearchParams(window.location.search);
+            const categoriaSeleccionada = parametros.get('categoria');
+
+            // 2. Filtrar el array si existe el parámetro; si no, mostrar todos
+            const productosMostrar = categoriaSeleccionada
+                ? datos.productos.filter(p => p.categoria === categoriaSeleccionada)
+                : datos.productos;
+
+            // 3. Pintar en pantalla el resultado final
+            mostrarProductos(productosMostrar, 'container-productos');
         } catch (error) {
             console.error("No puedo cargar los productos:", error);
         }
