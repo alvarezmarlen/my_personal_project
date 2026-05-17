@@ -1,0 +1,140 @@
+/* --- 1. Reseteo Básico y Global --- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Montserrat, sans-serif;
+}
+
+:root {
+  --primary:#f8d9d6;
+  --black:#000000;
+  --white:#ffffff;
+  --dark-purple: #3c122c;
+  --medium-purple: #762ba3;
+  --light-purple: #ae40f0;
+  --yellow: #ffc800;
+  --pink: #fc5185;
+  --light-pink: #ffeffe;
+  --green: #00b090;
+  --background-gray: #eee;
+  --color :#dc3545;
+}
+
+/* =========================================================
+   ESTILOS FINALES PARA LA PÁGINA DE DETALLE - SUMI.CHH 🌸
+========================================================= */
+
+/* Contenedor principal que centra el contenido en la pantalla */
+#contenedor-detalle {
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+/* Estructura limpia en dos columnas (Foto izquierda / Info derecha) */
+.producto-detalle {
+  display: flex;
+  flex-direction: row;     /* Coloca los bloques lado a lado */
+  gap: 60px;               /* Distancia elegante entre la foto y el texto */
+  align-items: flex-start; /* Alineación perfecta al techo */
+  background-color: #ffffff;
+  padding: 10px 0;         /* Espaciado sutil */
+}
+
+/* 📸 Columna Izquierda: Imagen del producto */
+.producto-imagen {
+  flex: 1;                 /* Toma la mitad del espacio */
+  display: flex;
+  justify-content: center;
+}
+
+.producto-imagen img {
+  width: 100%;
+  max-width: 460px;        /* Mantiene la foto en un tamaño perfecto */
+  height: auto;
+  object-fit: contain;
+  border-radius: 8px;      /* Suavizado sutil en las esquinas */
+}
+
+/* 🏷️ Columna Derecha: Bloque de información */
+.producto-info {
+  flex: 1;                 /* Toma la otra mitad del espacio */
+  display: flex;
+  flex-direction: column; 
+  padding-top: 25px;       /* 🔥 Ajuste óptico: Alinea el título con la parte alta de la foto */
+  text-align: left;
+}
+
+/* Título principal del producto */
+.producto-info h3 {
+  font-size: 2.4rem;
+  color: #333333;          /* Un gris oscuro suave, mucho más elegante que el negro puro */
+  font-weight: 600;
+  margin: 0 0 8px 0;       /* Separación delicada con el precio */
+}
+
+/* Precio destacado */
+.producto-info .precio {
+  font-size: 1.6rem;
+  color: #333333;          /* Integrado con la tipografía limpia de tu tienda */
+  font-weight: 700;
+  margin: 0 0 15px 0;
+}
+
+/* Mensaje compacto de Stock */
+.producto-stock {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #2ec4b6;          /* Un verde turquesa suave y limpio, nada chillón */
+  margin: 0 0 20px 0;
+  display: flex;
+  align-items: center;
+}
+
+/* 🛒 Botón "Añadir a la cesta" integrado con la paleta de Sumi.chh 🌸 */
+.btn-comprar {
+  align-self: flex-start;   /* Evita que el botón se estire a lo ancho */
+  background-color: #f7d6d6; /* 🌸 El rosa pastel exacto y dulce de tu cabecera */
+  color: #333333;            /* Letras oscuras suaves para que se lea a la perfección */
+  border: 2px solid #f7d6d6; /* Borde del mismo tono rosa */
+  padding: 14px 45px;
+  border-radius: 25px;       /* ¡Bordes redondeados! Mucho más dulces y acordes a tu marca */
+  font-family: Montserrat, sans-serif;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  cursor: pointer;
+  transition: all 0.3s ease; /* Animación suave para el cambio de color */
+  margin-bottom: 30px;      /* Da aire limpio antes de la descripción */
+}
+
+/* Efecto hover: Limpio, minimalista y refinado */
+.btn-comprar:hover {
+  background-color: #ffffff; /* Se vuelve blanco */
+  color: #333333;            /* Mantiene la letra clara */
+  border-color: #f7d6d6;     /* Conserva el borde rosa sutil */
+}
+
+/* --- Bloque de Detalles Adicionales (Abajo) --- */
+.producto-detalles-adicionales {
+  margin-top: 5px;
+  padding-top: 25px;
+  border-top: 1px solid #f0f0f0; /* Línea divisoria muy suave que casi no se nota */
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Texto de la descripción */
+.producto-descripcion {
+  font-size: 0.95rem;
+  color: #666666;            /* Gris neutro para una lectura muy limpia */
+  line-height: 1.6;
+}
+
+/* Texto de los materiales */
+.producto-materiales {
+  font-size: 0.9rem;
+  color: #777777;
+}

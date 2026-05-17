@@ -1,0 +1,144 @@
+/* --- 1. Reseteo Básico y Global --- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Montserrat, sans-serif;
+}
+
+:root {
+  --primary:#f8d9d6;
+  --black:#000000;
+  --white:#ffffff;
+  --dark-purple: #3c122c;
+  --medium-purple: #762ba3;
+  --light-purple: #ae40f0;
+  --yellow: #ffc800;
+  --pink: #fc5185;
+  --light-pink: #ffeffe;
+  --green: #00b090;
+  --background-gray: #eee;
+  --color :#dc3545;
+}
+
+/* =========================================================
+   ESTILOS PARA LA PÁGINA "CONÓCEME" - SUMI.CHH 🌸
+========================================================= */
+.categoria-cabecera {
+  text-align: center;
+  padding: 40px 0 10px 0; /* 📐 Copiado exactamente de tu catálogo */
+}
+
+.categoria-cabecera h1 {
+  font-family: 'Montserrat', sans-serif;
+  color: #2b181d;          /* O usa var(--dark-purple) si tienes definida la variable */
+  font-size: 1.8rem;       /* 📐 Tamaño idéntico */
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin: 0;               /* Resetea cualquier margen que añada el navegador por defecto */
+  line-height: 1.2;        /* Ajustamos la altura de línea igual que el catálogo */
+}
+
+.linea-decorativa {
+  width: 50px;
+  height: 2px;
+  background-color: var(--pink); 
+  margin: 10px auto 0 auto;
+}
+
+/* 📦 Contenedor principal: Quitamos márgenes superiores extra que empujen el contenido */
+#contenedor-nosotros {
+  max-width: 1200px;      
+  margin: 0 auto 60px auto; /* 📐 Cambiado a 0 por arriba para que la cabecera mande en la altura */
+  padding: 0 40px;        
+  font-family: Montserrat, sans-serif;
+  color: #333333;
+}
+
+/* Espaciado entre bloques de la historia */
+.seccion-nosotros section {
+  margin-bottom: 5px;
+  width: 100%;
+}
+
+/* Subtítulos internos (¡Hola!...) */
+.seccion-nosotros h3 {
+  font-size: 1.5rem;      
+  color: #333333;
+  font-weight: 600;
+  margin-top: 40px;       /* Mantiene el saludo bien separado del título superior */
+  margin-bottom: 18px;    
+  text-align: left;       
+}
+
+/* Párrafos de la historia */
+.seccion-nosotros p {
+  font-size: 1.1rem;     
+  line-height: 1.8;       
+  color: #555555;
+  margin-bottom: 22px;
+  text-align: justify;    
+  hyphens: manual;        
+}
+
+/* Resaltados en negrita */
+.seccion-nosotros strong {
+  color: #2b181d;         
+  font-weight: 600;
+}
+
+/* 🖼️ Contenedor de exposición para sus cuadros (también lo hacemos un poco más grande en armonía) */
+.cuadro-galeria {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 5px auto 50px auto;
+  max-width: 550px;       /* 📐 Ampliado de 600px a 750px para que luzcan más los cuadros y llenen la pantalla */
+  background-color: #ffffff;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04); 
+}
+
+.cuadro-galeria img {
+  width: 100%;
+  height: auto;
+  max-height: 480px;      /* 🎯 ESTA LÍNEA SE ENCARGA DE TODO: Evita que los cuadros verticales se hagan gigantes */
+  object-fit: contain;    /* Respeta la forma original de la pintura sin deformarla */
+  border-radius: 4px;
+}
+
+.cuadro-galeria .pie-foto {
+  font-size: 1.05rem;     
+  font-style: italic;
+  color: #888888;
+  margin-top: 15px;
+  text-align: center;
+}
+
+/* Bloque destacado final de agradecimiento */
+.cierre-agradecimiento {
+  margin-top: 60px;
+  padding: 45px;
+  background-color: #fdf8f8; 
+  border-radius: 12px;
+  text-align: center;
+  max-width: 1000px;      /* Centra el bloque rosa al final de forma elegante */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cierre-agradecimiento h4 {
+  font-size: 1.5rem;      
+  color: #333333;
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+
+.cierre-agradecimiento p {
+  font-size: 1.15rem;     
+  margin-bottom: 0;
+  text-align: justify;    
+  hyphens: manual;        
+}

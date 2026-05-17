@@ -85,6 +85,7 @@ export function mostrarProductos(listaProductos, contenedorId) {
     listaProductos.forEach(producto => {
     const card = document.createElement('a');
     card.classList.add('producto-card');
+    card.href = `detalle.html?id=${producto.id}`
 
     card.innerHTML = `
         <div class="producto-imagen">
@@ -92,10 +93,53 @@ export function mostrarProductos(listaProductos, contenedorId) {
         </div>
         <div class="producto-info">
             <h3>${producto.productName}</h3>
-              <p class="precio">${producto.precio}€</p>
-            <button class="btn-comprar" data-id="${producto.id}">Añadir a la cesta</button>
+              <p class="precio">${producto.precio.toFixed(2)}€</p>
+            <button data-id="${producto.id}"
+                type='button'
+                class="btn-comprar" 
+                data-label="${producto.productName}"
+                data-price="${producto.precio}"
+                data-image="${producto.imagen}"
+                >Añadir a la cesta</button>
         </div>
     `;
         contenedor.appendChild(card);
     });
+}
+
+
+/* ---------------------------------------------------------
+    5. PINTAR LAS TARJETAS DE DETALLES 
+-----------------------------------------------------------*/
+export function mostrarDetalle(producto, contenedorId) {
+    const contenedor = document.getElementById(contenedorId);
+    contenedor.innerHTML = ""; // Limpiamos por si hay algo antes
+    
+    //Creamos la tarjeta directamente para este producto.
+    const detalle = document.createElement('div');
+    detalle.classList.add('producto-detalle');
+
+    detalle.innerHTML = `
+        <div class="producto-imagen">
+            <img src="${producto.imagen}" alt="${producto.productName}">
+        </div>
+        <div class="producto-info">
+            <h3>${producto.productName}</h3>
+            <p class="precio">${producto.precio.toFixed(2)}€</p>
+            <p class="producto-stock">🟢 Stock: ${producto.stock}</p>
+
+            <button data-id="${producto.id}"
+                type='button'
+                class="btn-comprar" 
+                data-label="${producto.productName}"
+                data-price="${producto.precio}"
+                data-image="${producto.imagen}"
+                >Añadir a la cesta</button>
+            <div class="producto-detalles-adicionales">
+                <p class="producto-descripcion">${producto.descripcion || 'Sin descripción disponible.'}</p>
+                <p class="producto-materiales"><strong>Materiales:</strong> ${producto.materiales || 'No especificados.'}</p>
+            </div>
+        </div>
+    `;
+        contenedor.appendChild(detalle);    
 }
