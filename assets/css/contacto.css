@@ -1,0 +1,229 @@
+/* --- 1. Reseteo Básico y Global --- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Montserrat, sans-serif;
+}
+
+:root {
+  --primary:#f8d9d6;
+  --black:#000000;
+  --white:#ffffff;
+  --dark-purple: #3c122c;
+  --medium-purple: #762ba3;
+  --light-purple: #ae40f0;
+  --yellow: #ffc800;
+  --pink: #fc5185;
+  --light-pink: #ffeffe;
+  --green: #00b090;
+  --background-gray: #eee;
+  --color :#dc3545;
+}
+/* =========================================================
+   ESTILOS PÁGINA DE CONTACTO - SUMI.CHH 🌸
+========================================================= */
+/* 📦 Forzamos el contenedor principal */
+#contenedor-contacto {
+  max-width: 1200px;
+  margin: 0 auto 60px auto;
+  padding: 0 40px;
+  font-family: 'Montserrat', sans-serif;
+  box-sizing: border-box;
+}
+
+/* 🎯 Cabecera: Forzamos la misma altura que Catálogo y Nosotros */
+.categoria-cabecera {
+  text-align: center;
+  padding: 40px 0 10px 0;
+  width: 100%;
+}
+
+.categoria-cabecera h1 {
+  font-family: 'Montserrat', sans-serif;
+  color: #2b181d;
+  font-size: 1.8rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.linea-decorativa {
+  width: 50px;
+  height: 2px;
+  background-color: #e5c5c5; /* Rosa suave */
+  margin: 10px auto 0 auto;
+}
+
+/* 📊 Caja contenedora de los dos bloques (Formulario e Info) */
+.seccion-contacto-bloques {
+  display: flex;
+  gap: 40px;
+  margin-top: 40px;
+  align-items: flex-start;
+  width: 100%;
+}
+
+/* Estilo para las dos columnas en paralelo */
+.bloque-formulario, .bloque-informacion {
+  flex: 1;
+  width: 100%;
+}
+
+/* ⬜ Tarjetas de contenedor blancas con sombra sutil */
+.tarjeta-blanca {
+  background-color: #ffffff;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+  box-sizing: border-box;
+}
+
+.tarjeta-blanca h2 {
+  font-size: 1.5rem;
+  color: #2b181d;
+  font-weight: 600;
+  margin-top: 0;
+  margin-bottom: 25px;
+}
+
+/* ℹ️ Párrafo de introducción */
+.introduccion-info {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: #555555;
+  margin-bottom: 30px;
+  text-align: left;
+}
+
+/* 📋 Formulario e Inputs */
+.formulario-contacto .campo {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.formulario-contacto label {
+  font-size: 0.95rem;
+  color: #444444;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.formulario-contacto input[type="text"],
+.formulario-contacto input[type="email"],
+.formulario-contacto textarea {
+  padding: 12px 15px;
+  border: 1px solid #e2e2e2;
+  border-radius: 6px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1rem;
+  color: #333333;
+  background-color: #fafafa;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+/* Campos de nombre y apellido en la misma fila */
+.grupo-input-doble {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+}
+
+.grupo-input-doble .campo {
+  flex: 1;
+}
+
+/* 💗 Botón de Envío */
+.boton-enviar {
+  width: 100%;
+  padding: 16px;
+  background-color: #2b181d;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
+}
+
+.boton-enviar:hover {
+  background-color: #c9a0a0;
+  color: #2b181d;
+}
+
+/* 📍 Iconos y Datos de contacto directo */
+.datos-contacto {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  margin-bottom: 35px;
+}
+
+.dato-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.dato-item .icono {
+  font-size: 1.4rem;
+  display: inline-block;
+  min-width: 25px;
+}
+
+.dato-item p {
+  margin: 0;
+  font-size: 1.05rem;
+  color: #444444;
+}
+
+/* 🔗 Redes Sociales */
+.bloque-redes h3 {
+  font-size: 1.1rem;
+  color: #2b181d;
+  margin-bottom: 15px;
+}
+
+.iconos-redes {
+  display: flex;
+  gap: 15px;
+}
+
+.red-enlace {
+  text-decoration: none;
+  color: #555555;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 10px 20px;
+  border: 1px solid #eeeeee;
+  border-radius: 25px;
+  background-color: #ffffff;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+}
+
+.red-enlace:hover {
+  background-color: #fdf8f8;
+  border-color: #e5c5c5;
+  color: #2b181d;
+}
+
+/* 📱 Soporte Móvil */
+@media (max-width: 768px) {
+  .seccion-contacto-bloques {
+    flex-direction: column;
+    gap: 20px;
+  }
+  .grupo-input-doble {
+    flex-direction: column;
+    gap: 0;
+  }
+}

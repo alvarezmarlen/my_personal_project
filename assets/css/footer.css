@@ -6,6 +6,8 @@
 }
 :root {
   --primary:#f8d9d6;
+  --dark-elegant: #2b181d; /* 🍫 Tu chocolate oscuro */
+  --pink-soft: #e5c5c5; /* Rosa suave para hovers */
   --black:#000000;
   --white:#ffffff;
   --dark-purple: #3c122c;
@@ -31,32 +33,35 @@ footer{
     padding-top: 2rem;
     text-align: center;
     margin-bottom: 2rem;
-    color: #777;
+    color: var(--dark-elegant);
     font-size: 15px;
   
   }
 .sobre-nosotros a,  .informacion-legal a {
       text-decoration: none;
-      color: #777;
+      color: #555555;
       display: flex;
       justify-content: center;
       margin-top: 0.5rem;
+      transition: color 0.3s ease;
 }
 .sobre-nosotros a:hover,  .informacion-legal a:hover {
-      color: #eb958d;
+      color: var(--pink-soft);
 }
 .sobre-nosotros i, .informacion-legal i {
   margin-right: 8px;
-  color: var(--pink);   
+  color: var(--dark-elegant);   
 }
 
 .sobre-nosotros a:hover i, .informacion-legal a:hover i {
-  color: #00223e;     
+  color: var(--pink-soft);     
 }
 
 .titulos-footer  {
       margin-bottom: 0.7rem; 
-     }
+      font-weight: 600;
+      letter-spacing: 1px;
+}
 
 
   .central{
@@ -86,15 +91,23 @@ footer{
     gap: 15px;  
   }
 .fa-brands{
-  color: #524e4e;
+  color: var(--dark-elegant);
   font-size: 1.5rem;
+  transition: transform 0.3s ease, color 0.3s ease;
 }
 .fa-brands:hover{
-  color: #eb958d;
+  color: var(--pink-soft);
+  transform: scale(1.15);
 }
 
 .footer-bajo{
   text-align: center;
-  padding: 0.3rem;
-  color: #777;
+  padding: 0.8rem;
+  color: #ffffff;
+  background-color: var(--dark-elegant);
+  font-size: 0.85rem;
+}
+.footer-bajo em {
+  font-style: normal;
+  letter-spacing: 1px;
 }

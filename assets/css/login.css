@@ -1,0 +1,155 @@
+/* --- 1. Reseteo Básico y Global --- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Montserrat, sans-serif;
+}
+
+:root {
+  --primary:#f8d9d6;
+  --black:#000000;
+  --white:#ffffff;
+  --dark-purple: #3c122c;
+  --medium-purple: #762ba3;
+  --light-purple: #ae40f0;
+  --yellow: #ffc800;
+  --pink: #fc5185;
+  --light-pink: #ffeffe;
+  --green: #00b090;
+  --background-gray: #eee;
+  --color :#dc3545;
+}
+
+
+/* =========================================================
+   ESTILOS PÁGINA DE LOGIN - SUMI.CHH 🌸
+========================================================= */
+
+#contenedor-login {
+  min-height: 70vh; /* Forzamos a que ocupe espacio vertical para centrarlo entre nav y footer */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+  background-color: #fdfafb; /* Un fondo sutilmente rosado muy clarito */
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* ⬜ La caja blanca del formulario */
+.login-box {
+  max-width: 450px;
+  width: 100%;
+  background-color: #ffffff;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.04);
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.login-box h2 {
+  font-size: 1.6rem;
+  color: #2b181d; /* 🍫 Tu chocolate oscuro */
+  font-weight: 600;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.subtitulo-login {
+  font-size: 0.95rem;
+  color: #777777;
+  margin-bottom: 30px;
+  line-height: 1.4;
+}
+
+/* 📋 Estilos de los inputs (Sincronizados con contacto) */
+.formulario-login .campo {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  text-align: left; /* Los labels alineados a la izquierda */
+}
+
+.formulario-login label {
+  font-size: 0.9rem;
+  color: #444444;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.formulario-login input {
+  padding: 12px 15px;
+  border: 1px solid #e2e2e2;
+  border-radius: 6px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1rem;
+  color: #333333;
+  background-color: #fafafa;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.formulario-login input:focus {
+  outline: none;
+  border-color: #e5c5c5; /* Rosa suave al hacer clic */
+  background-color: #ffffff;
+}
+
+/* Enlaces pequeños */
+.opciones-login {
+  text-align: right;
+  margin-bottom: 25px;
+}
+
+.enlace-olvido, .registro-sugerencia a {
+  color: #555555;
+  font-size: 0.85rem;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.enlace-olvido:hover, .registro-sugerencia a:hover {
+  color: #e5c5c5; /* Brillo rosa al pasar el ratón */
+}
+
+/* 🍫 Botón de entrada estilo Premium */
+.boton-enviar {
+  width: 100%;
+  padding: 16px;
+  background-color: #2b181d; /* Tu color oscuro favorito */
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.boton-enviar:hover {
+  background-color: #e5c5c5; /* Rosa al pasar el ratón */
+  color: #2b181d;
+}
+
+/* Sugerencia de abajo */
+.registro-sugerencia {
+  margin-top: 25px;
+  border-top: 1px solid #eee;
+  padding-top: 20px;
+}
+
+.registro-sugerencia p {
+  font-size: 0.9rem;
+  color: #666666;
+  margin: 0;
+}
+
+.registro-sugerencia a {
+  font-size: 0.9rem;
+  color: #2b181d;
+  border-bottom: 1px solid transparent;
+}

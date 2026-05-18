@@ -7,12 +7,83 @@
     <meta name="description" content="Bellas prendas artesanales, para usar cada dia, luciendo elegante, bella y juvenil, regala con satisfaccion y acierto">
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'><script src="https://kit.fontawesome.com/384e83612b.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../assets/css/contacto.css">
     <title>Store Sumi.chh | Contacto</title>
 </head>
 <body>
     <div id="nav-placeholder"></div>
 
-    <main></main>
+    <main id="contenedor-contacto">
+        
+        <div class="categoria-cabecera">
+            <h1>Ponte en Contacto</h1>
+            <div class="linea-decorativa"></div>
+        </div>
+
+        <div class="seccion-contacto-bloques">
+            
+            <section class="bloque-formulario">
+                <div class="tarjeta-blanca">
+                    <h2>Envíanos un mensaje</h2>
+                    <form action="#" method="POST" class="formulario-contacto">
+                        <div class="grupo-input-doble">
+                            <div class="campo">
+                                <label for="nombre">Nombre *</label>
+                                <input type="text" id="nombre" name="nombre" required placeholder="Tu nombre">
+                            </div>
+                            <div class="campo">
+                                <label for="apellidos">Apellidos</label>
+                                <input type="text" id="apellidos" name="apellidos" placeholder="Tu apellido">
+                            </div>
+                        </div>
+
+                        <div class="campo">
+                            <label for="email">Email *</label>
+                            <input type="email" id="email" name="email" required placeholder="ejemplo@correo.com">
+                        </div>
+
+                        <div class="campo">
+                            <label for="mensaje">Mensaje *</label>
+                            <textarea id="mensaje" name="mensaje" rows="6" required placeholder="¿En qué te podemos ayudar? Escribe aquí..."></textarea>
+                        </div>
+
+                        <button type="submit" class="boton-enviar">Enviar Mensaje</button>
+                    </form>
+                </div>
+            </section>
+
+            <section class="bloque-informacion">
+                <div class="tarjeta-blanca info-detalles">
+                    <h2>Contacta con nosotros</h2>
+                    <p class="introduccion-info">Si tienes preguntas, quieres hacer un pedido personalizado o solo pasas a saludar, ¡aquí estamos diseñando con cada abalorio para responderte! 🌸✨✨</p>
+                    
+                    <div class="datos-contacto">
+                        <div class="dato-item">
+                            <span class="icono">📍</span>
+                            <p>Bilbao, España 48012</p>
+                        </div>
+                        <div class="dato-item">
+                            <span class="icono">📞</span>
+                            <p>+34 613 07 96 78</p>
+                        </div>
+                        <div class="dato-item">
+                            <span class="icono">⏰</span>
+                            <p>Horario: Lunes a Sábado — 9:30 a 17:30</p>
+                        </div>
+                    </div>
+
+                    <div class="bloque-redes">
+                        <h3>Síguenos</h3>
+                        <div class="iconos-redes">
+                            <a href="https://instagram.com" target="_blank" class="red-enlace">📸 Instagram</a>
+                            <a href="https://tiktok.com" target="_blank" class="red-enlace">🎵 TikTok</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div> 
+    </main>
 
     <div id="footer-placeholder"></div>
     
