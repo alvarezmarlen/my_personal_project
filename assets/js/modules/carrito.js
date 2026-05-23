@@ -3,24 +3,17 @@ import { actualizarContadorNav } from "./nav.js";
 // 🛒 Inicializamos el carrito leyendo de LocalStorage
 let carrito = JSON.parse(localStorage.getItem("carrito")) || []; // 🌟 Sin comillas en los corchetes
 
-export function agregarAlCarrito(id, nombre, precio) {
+export function agregarAlCarrito(id, nombre, precio, imagenUrl) {
     const productoExistente = carrito.find(item => item.id === id);
-    
+
     if (productoExistente) {
         productoExistente.cantidad++;
     } else {
-        const imgCatalogo = document.querySelector('[data-id="${id}"] img') || document.querySelector('img[src*="${id}"]');
-
-        let rutaImagenReal = imgCatalogo ? imgCatalogo.getAttribute('src') : '';
-
-        if (rutaImagenReal) {
-            rutaImagenReal = rutaImagenReal.replace(/^\.+[\/]/, ''); // Deja algo como "assets/img/catalogo/..."
-        }
         carrito.push({
             id: id,
             productName: nombre,
             precio: precio,
-            imagen: rutaImagenReal || `assets/img/catalogo/${id}.png`, // Salvavidas por si acaso
+            imagen: imagenUrl || `assets/img/catalogo/${id}.png`,
             cantidad: 1
         });
     }

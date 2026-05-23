@@ -25,8 +25,9 @@ export async function cargarSeccionProductos() {
                 const id = evento.target.dataset.id;
                 const nombre = evento.target.dataset.label;
                 const precio = evento.target.dataset.price;
-                        
-                agregarAlCarrito(id, nombre, precio);
+                const imagen = evento.target.dataset.image;
+
+                agregarAlCarrito(id, nombre, precio, imagen);
             });                
         });
         
@@ -54,8 +55,9 @@ export async function cargarSeccionDetalle() {
                 const id = evento.target.dataset.id;
                 const nombre = evento.target.dataset.label;
                 const precio = evento.target.dataset.price;
+                const imagen = evento.target.dataset.image;
 
-                agregarAlCarrito(id, nombre, precio);
+                agregarAlCarrito(id, nombre, precio, imagen);
             });
         }        
     } catch (error) {
