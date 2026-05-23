@@ -1,24 +1,71 @@
-// 🛒 Inicializamos el carrito leyendo de LocalStorage (si no hay nada, empieza como un array vacío)
-let carrito = JSON.parse(localStorage.getItem("carrito") || "[]");
+import { actualizarContadorNav } from "./nav.js";
 
+// 🛒 Inicializamos el carrito leyendo de LocalStorage
+let carrito = JSON.parse(localStorage.getItem("carrito")) || []; // 🌟 Sin comillas en los corchetes
 
 export function agregarAlCarrito(id, nombre, precio) {
     const productoExistente = carrito.find(item => item.id === id);
-    console.log(`Guardando en el carrito: ${nombre} (${precio}€)`);
+    
     if (productoExistente) {
-        // ➕ Si ya existe, sumamos 1 a su cantidad
         productoExistente.cantidad++;
     } else {
-        // 🆕 Si es nuevo, creamos el objeto y lo metemos al array
+        const imgCatalogo = document.querySelector('[data-id="${id}"] img') || document.querySelector('img[src*="${id}"]');
+
+        let rutaImagenReal = imgCatalogo ? imgCatalogo.getAttribute('src') : '';
+
+        if (rutaImagenReal) {
+            rutaImagenReal = rutaImagenReal.replace(/^\.+[\/]/, ''); // Deja algo como "assets/img/catalogo/..."
+        }
         carrito.push({
             id: id,
-            producName: nombre,
+            productName: nombre,
             precio: precio,
-            cantidad: 1 // Éste es su primer elemento, así que arranca en 1
-        })
+            imagen: rutaImagenReal || `assets/img/catalogo/${id}.png`, // Salvavidas por si acaso
+            cantidad: 1
+        });
     }
-    // 💾 Guardamos la lista actualizada convirtiéndola en texto JSON
+    
     localStorage.setItem("carrito", JSON.stringify(carrito));
     
-    console.log(carrito); 
+    // Actualizamos el número del Nav al instante
+    actualizarContadorNav();
+
+    // ========================================================
+    // 🪄 EFECTO ESTILO FARFETCH (FEEDBACK EN DOS TIEMPOS)
+    // ========================================================
+    const botones = document.querySelectorAll('.btn-comprar');
+    let botonPulsado = null;
+
+    botones.forEach(btn => {
+        if (btn.dataset.id === id) {
+            botonPulsado = btn;
+        }
+    });
+    
+    if (botonPulsado) {
+        // TIEMPO 1: El tick verde
+        botonPulsado.innerHTML = '<i class="fa-solid fa-check"></i> ¡Añadido!'; 
+        botonPulsado.style.backgroundColor = "#e8f5e9"; 
+        botonPulsado.style.color = "#2e7d32"; 
+        botonPulsado.style.pointerEvents = "none"; 
+        
+        // TIEMPO 2: Cambiar a "Ir a la bolsa"
+        setTimeout(() => {
+            botonPulsado.textContent = "VER CESTA / IR A LA BOLSA 🍓";
+            botonPulsado.style.backgroundColor = "#daffde"; 
+            botonPulsado.style.color = "#000";
+            botonPulsado.style.pointerEvents = "auto"; 
+            
+            botonPulsado.onclick = (evento) => {
+                evento.preventDefault();
+                evento.stopPropagation();
+                
+                if (window.location.pathname.includes('/pages/')) {
+                    window.location.href = "./carrito.html";
+                } else {
+                    window.location.href = "./pages/carrito.html";
+                }
+            };
+        }, 1500); 
+    }
 }

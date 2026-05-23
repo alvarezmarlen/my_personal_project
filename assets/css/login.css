@@ -25,23 +25,41 @@
 /* =========================================================
    ESTILOS PÁGINA DE LOGIN - SUMI.CHH 🌸
 ========================================================= */
+body {
+  /* 🖼️ TRUCO INTERMEDIO: 1 Filtro aclarador + Foto Izquierda + Foto Derecha */
+  background-image: 
+    linear-gradient(rgba(249, 245, 246, 0.70), rgba(249, 245, 246, 0.70)), /* 1. El filtro suave */
+    url('/assets/img/catalogo/CollarPlateado-Frutilla06.png'),                       /* 2. Tu foto de la izquierda */
+    url('/assets/img/catalogo/CollarPlateado-Frutilla06.png'),                       /* 2. Tu foto de la izquierda */
+    url('/assets/img/catalogo/CollarPlateado-Frutilla06.png');                        /* 3. Tu foto de la derecha */
 
+  /* ⚙️ CONFIGURACIÓN PARA CADA IMAGEN (Separadas por comas en el mismo orden) */
+  background-repeat: no-repeat, no-repeat, no-repeat;
+  
+  /* 📐 TAMAÑO: El filtro ocupa todo, las fotos ocupan el 50% del ancho de la pantalla cada una */
+  background-size: cover, 35% auto, 35% auto; 
+  
+  /* 📍 POSICIÓN: El filtro centrado, una foto fija a la izquierda y la otra a la derecha */
+  background-position: center, left center, right ; 
+   margin: 0;
+}
 #contenedor-login {
-  min-height: 70vh; /* Forzamos a que ocupe espacio vertical para centrarlo entre nav y footer */
+  min-height: 75vh; /* Forzamos a que ocupe espacio vertical para centrarlo entre nav y footer */
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 40px 20px;
-  background-color: #fdfafb; /* Un fondo sutilmente rosado muy clarito */
+  
   font-family: 'Montserrat', sans-serif;
+  box-sizing: border-box;
 }
 
 /* ⬜ La caja blanca del formulario */
 .login-box {
+  margin: 20px;
   max-width: 450px;
   width: 100%;
   background-color: #ffffff;
-  padding: 40px;
+  padding: 50px;
   border-radius: 12px;
   box-shadow: 0 4px 25px rgba(0, 0, 0, 0.04);
   box-sizing: border-box;

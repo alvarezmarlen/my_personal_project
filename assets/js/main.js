@@ -1,130 +1,53 @@
 /* =========================================================
-   1. IMPORTACIONES
+   1. IMPORTACIONES (Traemos solo los jefes de sección)
 ========================================================= */
 import { obtenerDatos } from "./modules/api.js";
-import { cargarComponentes, mostrarCategorias, mostrarMasVisitados, mostrarProductos, mostrarDetalle } from "./modules/ui.js";
-import { agregarAlCarrito } from "./modules/carrito.js"
-
+import { cargarComponentes, mostrarCategorias, mostrarMasVisitados } from "./modules/ui.js";
+import { cargarSeccionProductos, cargarSeccionDetalle } from "./modules/productos.js";
+import { actualizarContadorNav } from "./modules/nav.js";
+import { renderizarCarrito } from "./modules/pagCarrito.js";
 
 /* =========================================================
-   2. DECLARACIÓN DE FUNCIONES (Las recetas)
+   2. FUNCIONES DE PÁGINA COMÚN E INICIO
 ========================================================= */
-// Componentes comunes (Nav y Footer)
+// Carga Nav y Footer en toda la web
 async function prepararPaginaComun() {
-        await cargarComponentes('nav-placeholder', '../assets/componentes/nav.html');
-        await cargarComponentes('footer-placeholder', '../assets/componentes/footer.html');
-    }
+    await cargarComponentes('nav-placeholder', '../assets/componentes/nav.html');
+    await cargarComponentes('footer-placeholder', '../assets/componentes/footer.html');
 
+    // 🌟 Llamamos al contador una vez que el HTML del Nav ya se ha incrustado
+    actualizarContadorNav();
+}
 
-// Datos de la página de Inicio (Categorías y Favoritos)
+// Carga las categorías y favoritos del Inicio
 async function inicializarPagina() {
-    const datos = await obtenerDatos('../data/db.json');   // 1. Llamamos al JSON
+    const datos = await obtenerDatos('../data/db.json');   
     if (datos) {
-        // 1. Esto ya lo tienes para el mosaico
-        if (datos.mosaico) {
-            mostrarCategorias(datos.mosaico, 'categoria-container');
-        }
-        // 2. AQUÍ es donde conectamos los favoritos
-        if (datos.productos) {             
-            mostrarMasVisitados(datos.productos, 'favoritos-container'); // Llamamos a tu nueva función de ui.js
-        }
+        if (datos.mosaico) mostrarCategorias(datos.mosaico, 'categoria-container');
+        if (datos.productos) mostrarMasVisitados(datos.productos, 'favoritos-container');
     }
 }
-
-// Sección de Catálogo de Productos
-async function cargarSeccionProductos() {
-        try {
-            const datos = await obtenerDatos('../data/db.json');
-           // 1. Detectar si hay una categoría específica en la URL 
-            const parametros = new URLSearchParams(window.location.search);
-            const categoriaSeleccionada = parametros.get('categoria');
-
-            // 2. Filtrar el array si existe el parámetro; si no, mostrar todos
-            const productosMostrar = categoriaSeleccionada
-                ? datos.productos.filter(p => p.categoria === categoriaSeleccionada)
-                : datos.productos;
-
-            // 3. Pintar en pantalla el resultado final
-            mostrarProductos(productosMostrar, 'container-productos');
-
-            //ESCUCHA LOS BOTONES : Añadir a la cesta
-            // Seleccionamos todos los botones de la pantalla
-            const botonesComprar = document.querySelectorAll('.btn-comprar');
-            
-            botonesComprar.forEach(boton => {    // Recorremos cada botón uno por uno              
-                boton.addEventListener('click', (evento) => {
-                        // 🎯 ¡LA LÍNEA MÁGICA! Evita que el clic "suba" al enlace <a>
-                        evento.preventDefault();  // 🛑 Frena la navegación del enlace <a>
-                        evento.stopPropagation(); // 🛑 Evita que el clic suba a la tarjeta entera
-                            
-                        // Capturamos los datos de atributos data-
-                        const id = evento.target.dataset.id;
-                        const nombre = evento.target.dataset.label;
-                        const precio = evento.target.dataset.price;
-                            
-                        // 2. 🚀 Enviamos los datos al otro archivo
-                        agregarAlCarrito(id, nombre, precio);
-                });                
-            });
-            
-        } catch (error) {
-            console.error("No puedo cargar los productos:", error);
-        }
-    }
-
-
-// Sección de Detalle de Producto
-async function cargarSeccionDetalle() {
-    try {
-        const datos = await obtenerDatos('../data/db.json');
-        // 1. Capturamos el ID de la URL (por ejemplo: detalle.html?id=9)
-        const parametros = new URLSearchParams(window.location.search);
-        const idBuscado = parametros.get('id');
-
-        // 2. Buscamos el producto único que coincida con ese ID
-        const productoEncontrado = datos.productos.find(p => p.id == idBuscado);
-
-        // 3. Lo pintamos en la pantalla usando la función de ui.js
-        mostrarDetalle(productoEncontrado, 'contenedor-detalle');
-
-        // Seleccionamos el único botón de comprar que se acaba de pintar
-        const botonComprar = document.querySelector('.btn-comprar');
-        // 5. Escuchamos el clic en ese botón
-        if (botonComprar) { 
-            botonComprar.addEventListener('click', (evento) => {
-                evento.preventDefault();
-                evento.stopPropagation();
-
-                // Capturamos los datos desde los atributos data- del botón
-                const id = evento.target.dataset.id;
-                const nombre = evento.target.dataset.label;
-                const precio = evento.target.dataset.price;
-
-                // Enviamos el producto al carrito
-                agregarAlCarrito(id, nombre, precio);
-            });
-        }        
-    } catch (error) {
-        console.error("Error al cargar el detalle:", error);
-    }
-}
-
 
 /* =========================================================
-   3. CONTROL DE EJECUCIÓN (¿Qué se activa en cada página?)
+   3. CONTROL DE EJECUCIÓN (El "Enrutador" inteligente)
 ========================================================= */
-// 1. Esto se ejecuta siempre en cualquier página para cargar Nav/Footer
+// Se ejecuta siempre
 prepararPaginaComun();
 
-// 2. Si estamos en la página de inicio (con contenedores de categorías)
+// Si estamos en la Home
 document.addEventListener('DOMContentLoaded', inicializarPagina);
 
-// 3. Si estamos en la página de catálogo de productos
+// Si estamos en el Catálogo, llamamos a su módulo correspondiente
 if (document.getElementById('container-productos')) {
-        cargarSeccionProductos();
-    }
+    cargarSeccionProductos();
+}
 
-// 4. Si estamos en la página de detalle de producto
+// Si estamos en el Detalle, llamamos a su módulo correspondiente
 if (document.getElementById('contenedor-detalle')) {
     cargarSeccionDetalle();
+}
+
+// 5. Si estamos en la página de la cesta de la compra
+if (document.querySelector('.productos-carrito')) {
+    renderizarCarrito();
 }
