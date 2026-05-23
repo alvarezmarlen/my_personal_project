@@ -80,7 +80,8 @@ export function mostrarMasVisitados(listaProductos, idContenedor) {
 -----------------------------------------------------------*/
 export function mostrarProductos(listaProductos, contenedorId) {
     const contenedor = document.getElementById(contenedorId);
-    contenedor.innerHTML = ""; // Limpiamos por si hay algo antes
+    if (!contenedor) return;
+    contenedor.innerHTML = "";
 
     listaProductos.forEach(producto => {
     const card = document.createElement('a');

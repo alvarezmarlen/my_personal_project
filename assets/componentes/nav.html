@@ -1,17 +1,5 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="author" content="Marlen Alvarez"/>
-    <meta name="description" content="Bellas prendas artesanales, para usar cada dia, luciendo elegante, bella y juvenil">
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'><script src="https://kit.fontawesome.com/384e83612b.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="../assets/css/nav.css">
-    <title>Store Sumi.chh</title>
-</head>
-<body>
-    <header id="header">
+<link rel="stylesheet" href="../assets/css/nav.css">
+<header id="header">
         <nav class="header-nav" >
             <ul>
                 <li><a href="https://www.instagram.com/"><i class="fa-brands fa-instagram"></i></a></li>
@@ -23,7 +11,7 @@
 
         <section class="header-top">
             <div class="logo-header">
-                <a href="/index.html"><img src="../assets/img/logo-iconos/logo-nombre.png" alt="Logo Sumi.chh"></a>
+                <a href="../index.html"><img src="../assets/img/logo-iconos/logo-nombre.png" alt="Logo Sumi.chh"></a>
             </div>
 
             <div class="header-center">
@@ -39,12 +27,17 @@
                         <button type="submit" class="buscar-btn"><i class="fa fa-search"></i></button>
                     </form>
                 </div>
-            </button>
             </div>
 
             <div class="header-right">
-                    <a href="/pages/login.html"><img src="../assets/img/logo-iconos/icono-cuenta.jpg" alt="Icono Iniciar Sesión"> <span class="title">Iniciar Sesión</span></a>
-                    <a href="/pages/carrito.html"><i class='boxicon bx bx-shopping-bag'></i> <span class="contador-carrito">0</span><img src="../assets/img/logo-iconos/icono-cesta.jpg" alt="Icono Carrito"> <span class="title">Cesta</span></a>
+                    <a href="../pages/login.html"><img src="../assets/img/logo-iconos/icono-cuenta.jpg" alt="Icono Iniciar Sesión"> <span class="title">Iniciar Sesión</span></a>
+                    <a href="../pages/carrito.html">
+                        <div class="cart-icon-wrapper">
+                            <img src="../assets/img/logo-iconos/icono-cesta.jpg" alt="Icono Carrito">
+                            <span class="contador-carrito">0</span>
+                        </div>
+                        <span class="title">Cesta</span>
+                    </a>
             </div>
         </section>
 
@@ -58,15 +51,12 @@
         <nav class="nav-inferior">
             <ul>
                 <li class="menu-logo-mobile">
-                    <img src="/assets/img/logo-iconos/logo-sumi.png" alt="Logo Sumi.chh">
+                    <img src="../assets/img/logo-iconos/logo-sumi.png" alt="Logo Sumi.chh">
                 </li>
-                <li><a href="/index.html"><i class='bx bx-home'></i><span>Inicio</span></a></li>
-                <li><a href="/pages/productos.html"><i class='bx bxs-grid'></i><span>Productos</span></a></li>
-                <li><a href="/pages/nosotros.html"><i class='bx bx-group'></i><span>Nosotros</span></a></li>
-                <li><a href="/pages/contacto.html"><i class='bx bx-envelope'></i><span>Contacto</span></a></li>
+                <li><a href="../index.html"><i class='bx bx-home'></i><span>Inicio</span></a></li>
+                <li><a href="../pages/productos.html"><i class='bx bxs-grid'></i><span>Productos</span></a></li>
+                <li><a href="../pages/nosotros.html"><i class='bx bx-group'></i><span>Nosotros</span></a></li>
+                <li><a href="../pages/contacto.html"><i class='bx bx-envelope'></i><span>Contacto</span></a></li>
             </ul>
         </nav>
     </header>
-    
-</body>
-</html>

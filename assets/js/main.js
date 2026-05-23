@@ -6,6 +6,7 @@ import { cargarComponentes, mostrarCategorias, mostrarMasVisitados } from "./mod
 import { cargarSeccionProductos, cargarSeccionDetalle } from "./modules/productos.js";
 import { actualizarContadorNav } from "./modules/nav.js";
 import { renderizarCarrito } from "./modules/pagCarrito.js";
+import { iniciarBanner } from "./modules/banner.js";
 
 /* =========================================================
    2. FUNCIONES DE PÁGINA COMÚN E INICIO
@@ -29,25 +30,21 @@ async function inicializarPagina() {
 }
 
 /* =========================================================
-   3. CONTROL DE EJECUCIÓN (El "Enrutador" inteligente)
+   3. CONTROL DE EJECUCIÓN (Enrutador por URL)
 ========================================================= */
-// Se ejecuta siempre
 prepararPaginaComun();
 
-// Si estamos en la Home
-document.addEventListener('DOMContentLoaded', inicializarPagina);
+const pagina = window.location.pathname.split('/').pop() || 'index.html';
 
-// Si estamos en el Catálogo, llamamos a su módulo correspondiente
-if (document.getElementById('container-productos')) {
+if (pagina === 'index.html') {
+    document.addEventListener('DOMContentLoaded', () => {
+        inicializarPagina();
+        iniciarBanner();
+    });
+} else if (pagina === 'productos.html') {
     cargarSeccionProductos();
-}
-
-// Si estamos en el Detalle, llamamos a su módulo correspondiente
-if (document.getElementById('contenedor-detalle')) {
+} else if (pagina === 'detalle.html') {
     cargarSeccionDetalle();
-}
-
-// 5. Si estamos en la página de la cesta de la compra
-if (document.querySelector('.productos-carrito')) {
+} else if (pagina === 'carrito.html') {
     renderizarCarrito();
 }

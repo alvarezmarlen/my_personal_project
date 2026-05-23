@@ -16,53 +16,31 @@
     <main id="contenedor-carrito">
         <section class="productos-carrito">
             <h2>Tu Cesta</h2>
-            
-            <div class="tarjeta-producto-carrito">
-                <div class="producto-info-principal">
-                    <img src="../assets/img/catalogo/ColganteMovil-Estrella4.png" alt="Producto ejemplo" class="imagen-carrito-prod">
-                    <div class="detalles-prod">
-                        <h3>Cuelgamóvil Araña</h3>
-                        <p class="precio-unitario">8.00€</p>
-                    </div>
-                </div>
-                
-                <div class="cantidad-control">
-                    <button class="btn-cantidad" type="button">-</button>
-                    <span class="numero-cantidad">1</span>
-                    <button class="btn-cantidad" type="button">+</button>
-                </div>
-                
-                <div class="subtotal-eliminar">
-                    <p class="precio-subtotal">8.00€</p>
-                    <button class="btn-eliminar" title="Eliminar producto"><i class="fa-solid fa-trash-can"></i></button>
-                </div>
-            </div>
-
-            </section>
+        </section>
 
         <section class="resumen-carrito">
             <div class="tarjeta-blanca resumen-box">
                 <h3>Resumen del pedido</h3>
-                
+
                 <div class="linea-resumen">
                     <span>Subtotal</span>
-                    <span>8.00€</span>
+                    <span id="subtotal-valor">0.00€</span>
                 </div>
                 <div class="linea-resumen">
                     <span>Envío (Toda España)</span>
-                    <span class="envio-gratis">4,90€</span>
+                    <span class="envio-gratis" id="envio-valor">4,90€</span>
                 </div>
-                
+
                 <hr class="separador-resumen">
-                
+
                 <div class="linea-resumen total">
                     <span>Total</span>
-                    <span class="precio-total">8.00€</span>
+                    <span class="precio-total" id="total-valor">0.00€</span>
                 </div>
-                
+
                 <button class="boton-enviar btn-pagar">Proceder al pago</button>
-                
-                <a href="/pages/productos.html" class="seguir-comprando">← Seguir comprando</a>
+
+                <a href="./productos.html" class="seguir-comprando">← Seguir comprando</a>
             </div>
         </section>
     </main>

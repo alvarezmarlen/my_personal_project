@@ -44,6 +44,12 @@ export async function cargarSeccionDetalle() {
         const idBuscado = parametros.get('id');
 
         const productoEncontrado = datos.productos.find(p => p.id == idBuscado);
+
+        if (!productoEncontrado) {
+            document.getElementById('contenedor-detalle').innerHTML = '<p style="text-align:center;margin-top:40px;color:#777;">Producto no encontrado</p>';
+            return;
+        }
+
         mostrarDetalle(productoEncontrado, 'contenedor-detalle');
 
         const botonComprar = document.querySelector('.btn-comprar');

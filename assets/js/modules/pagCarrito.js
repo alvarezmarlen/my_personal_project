@@ -1,20 +1,22 @@
 import { actualizarContadorNav } from "./nav.js";
+import { getCart, setCart, saveCart } from "./cartState.js";
 
-// Leer el carrito real de la memoria LocalStorage
-let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+const GASTOS_ENVIO = 4.90;
 
-// 🛒 FUNCIÓN 1: Pintar la cesta y calcular totales reales
 export function renderizarCarrito() {
+    const carrito = getCart();
     const contenedorProductos = document.querySelector('.productos-carrito');
-    const resumenSubtotal = document.querySelectorAll('.linea-resumen span')[1];
-    const precioTotal = document.querySelector('.precio-total');
+    const resumenSubtotal = document.getElementById('subtotal-valor');
+    const precioTotal = document.getElementById('total-valor');
+    const envioSpan = document.getElementById('envio-valor');
 
-    if (!contenedorProductos) return; 
+    if (!contenedorProductos) return;
 
     if (carrito.length === 0) {
-        contenedorProductos.innerHTML = '<p style="margin-top:20px; color:#777; text-align:center;">Tu cesta está vacía 🍓</p>';
+        contenedorProductos.innerHTML = '<p class="carrito-vacio">Tu cesta está vacía 🍓</p>';
         if (resumenSubtotal) resumenSubtotal.textContent = '0.00€';
         if (precioTotal) precioTotal.textContent = '0.00€';
+        if (envioSpan) envioSpan.textContent = '4,90€';
         return;
     }
 
@@ -25,47 +27,40 @@ export function renderizarCarrito() {
         const subtotalProducto = parseFloat(producto.precio) * producto.cantidad;
         totalAcumulado += subtotalProducto;
 
-        // 🌟 SOLUCIÓN DIRECTA: Usamos exactamente la ruta original de tu db.json.
-        // Como ya viene guardada con un solo "../", funciona de maravilla desde la carpeta /pages/.
         let rutaImagen = producto.imagen || producto.img || '';
 
-        // Inyectamos la estructura final limpia con el tamaño de foto corregido (70px)
         contenedorProductos.innerHTML += `
-            <div class="tarjeta-producto-carrito" data-id="${producto.id}" style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
-                <img src="${rutaImagen}" alt="${producto.productName}" class="img-producto-carrito" style="width:70px; height:70px; object-fit:cover; border-radius:8px;">
-                
-                <div class="info-producto-carrito" style="flex-grow: 1; margin-left: 15px;">
+            <div class="tarjeta-producto-carrito" data-id="${producto.id}">
+                <img src="${rutaImagen}" alt="${producto.productName}" class="img-producto-carrito">
+                <div class="info-producto-carrito">
                     <h3>${producto.productName}</h3>
                     <p class="precio-unitario">${parseFloat(producto.precio).toFixed(2)}€</p>
                 </div>
-
                 <div class="cantidad-control">
                     <button class="btn-cantidad btn-menos" data-action="menos">-</button>
                     <span class="numero-cantidad">${producto.cantidad}</span>
                     <button class="btn-cantidad btn-mas" data-action="mas">+</button>
                 </div>
-
-                <p class="precio-subtotal" style="margin: 0 20px; min-width: 60px; text-align: right;">${subtotalProducto.toFixed(2)}€</p>
-
-                <button class="btn-eliminar" style="background:none; border:none; color:#c62828; cursor:pointer; font-size:14px; padding:5px; margin-left: auto; display: flex; align-items: center; gap: 5px;">
+                <p class="precio-subtotal">${subtotalProducto.toFixed(2)}€</p>
+                <button class="btn-eliminar">
                     <i class="fa-solid fa-trash"></i> Quitar
                 </button>
             </div>
         `;
     });
 
-    // Actualizamos las cifras numéricas del recuadro derecho de pedido
+    const totalConEnvio = totalAcumulado + GASTOS_ENVIO;
     if (resumenSubtotal) resumenSubtotal.textContent = `${totalAcumulado.toFixed(2)}€`;
-    if (precioTotal) precioTotal.textContent = `${totalAcumulado.toFixed(2)}€`;
+    if (precioTotal) precioTotal.textContent = `${totalConEnvio.toFixed(2)}€`;
+    if (envioSpan) envioSpan.textContent = `${GASTOS_ENVIO.toFixed(2).replace('.', ',')}€`;
 
     asignarEventosBotones();
 }
 
-// 🧠 FUNCIÓN 2: Lógica interactiva de botones (+ , - , Quitar)
 function asignarEventosBotones() {
-    // Escuchar botones MÁS (+)
     document.querySelectorAll('.btn-mas').forEach(boton => {
         boton.onclick = (e) => {
+            const carrito = getCart();
             const tarjeta = e.target.closest('.tarjeta-producto-carrito');
             const id = tarjeta.dataset.id;
             const producto = carrito.find(item => item.id == id);
@@ -76,9 +71,9 @@ function asignarEventosBotones() {
         };
     });
 
-    // Escuchar botones MENOS (-)
     document.querySelectorAll('.btn-menos').forEach(boton => {
         boton.onclick = (e) => {
+            const carrito = getCart();
             const tarjeta = e.target.closest('.tarjeta-producto-carrito');
             const id = tarjeta.dataset.id;
             const producto = carrito.find(item => item.id == id);
@@ -89,15 +84,16 @@ function asignarEventosBotones() {
         };
     });
 
-    // Escuchar botones ELIMINAR 
     document.querySelectorAll('.btn-eliminar').forEach(boton => {
         boton.onclick = (e) => {
+            let carrito = getCart();
             const tarjeta = e.target.closest('.tarjeta-producto-carrito');
             const id = tarjeta.dataset.id;
             const producto = carrito.find(item => item.id == id);
-            
+
             if (confirm(`¿Seguro que deseas quitar "${producto.productName}" de tu cesta?`)) {
                 carrito = carrito.filter(item => item.id != id);
+                setCart(carrito);
                 guardarYRefrescar();
             }
         };
@@ -105,7 +101,7 @@ function asignarEventosBotones() {
 }
 
 function guardarYRefrescar() {
-    localStorage.setItem("carrito", JSON.stringify(carrito));
+    saveCart();
     renderizarCarrito();
     actualizarContadorNav();
 }
