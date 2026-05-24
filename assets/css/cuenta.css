@@ -1,0 +1,145 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Montserrat, sans-serif;
+}
+
+:root {
+  --primary:#f8d9d6;
+  --black:#000000;
+  --white:#ffffff;
+  --dark-purple: #3c122c;
+  --medium-purple: #762ba3;
+  --light-purple: #ae40f0;
+  --pink: #fc5185;
+  --green: #00b090;
+}
+
+body {
+  background-image: linear-gradient(rgba(249, 245, 246, 0.70), rgba(249, 245, 246, 0.70)),
+    url('/assets/img/catalogo/CollarFrutilla-abalorios02.png');
+  background-size: cover;
+  background-position: center;
+}
+
+#contenedor-cuenta {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 60px 20px;
+  min-height: 75vh;
+}
+
+.categoria-cabecera {
+  text-align: center;
+  padding: 40px 0 10px 0;
+}
+
+.categoria-cabecera h1 {
+  color: var(--dark-purple);
+  font-size: 1.8rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.linea-decorativa {
+  width: 50px;
+  height: 2px;
+  background-color: var(--pink);
+  margin: 10px auto 0 auto;
+}
+
+.cuenta-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 30px;
+  margin-top: 40px;
+}
+
+.tarjeta-blanca {
+  background: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+}
+
+.tarjeta-blanca h2 {
+  color: var(--dark-purple);
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+  border-bottom: 2px solid var(--primary);
+  padding-bottom: 10px;
+}
+
+#perfil-info p {
+  font-size: 0.95rem;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.boton-enviar {
+  width: 100%;
+  padding: 14px;
+  background-color: #2b181d;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.boton-enviar:hover {
+  background-color: #c9a0a0;
+  color: #2b181d;
+}
+
+.pedido-card {
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 15px;
+}
+
+.pedido-card:last-child {
+  margin-bottom: 0;
+}
+
+.pedido-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-size: 0.85rem;
+  color: #888;
+}
+
+.pedido-header strong {
+  color: var(--dark-purple);
+}
+
+.pedido-items {
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 8px;
+}
+
+.pedido-total {
+  font-weight: 600;
+  color: var(--dark-purple);
+  font-size: 1rem;
+}
+
+.sin-pedidos {
+  color: #999;
+  text-align: center;
+  padding: 30px 0;
+}
+
+@media (max-width: 768px) {
+  .cuenta-grid {
+    grid-template-columns: 1fr;
+  }
+}

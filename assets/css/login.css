@@ -171,3 +171,149 @@ body {
   color: #2b181d;
   border-bottom: 1px solid transparent;
 }
+
+.campo input.error {
+  border-color: #dc3545;
+  background: #fff5f5;
+}
+
+.campo .error-msg {
+  display: none;
+  color: #dc3545;
+  font-size: 0.78rem;
+  margin-top: 4px;
+}
+
+.campo .error-msg.visible {
+  display: block;
+}
+
+/* Modal overlay (compartido con checkout) */
+.checkout-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 9999;
+  justify-content: center;
+  align-items: center;
+}
+
+.checkout-overlay.active {
+  display: flex;
+}
+
+.checkout-modal {
+  background: #fff;
+  border-radius: 16px;
+  padding: 40px 36px 36px;
+  width: 90%;
+  max-width: 440px;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+}
+
+.checkout-close {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  background: none;
+  border: none;
+  font-size: 1.6rem;
+  color: #999;
+  cursor: pointer;
+  transition: color 0.2s;
+  line-height: 1;
+}
+
+.checkout-close:hover {
+  color: #2b181d;
+}
+
+.checkout-modal h2 {
+  margin: 0 0 24px;
+  color: #2b181d;
+  font-weight: 600;
+  font-size: 1.3rem;
+  text-align: center;
+}
+
+.checkout-campo {
+  margin-bottom: 18px;
+}
+
+.checkout-campo label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #444;
+}
+
+.checkout-campo input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  color: #333;
+  transition: border-color 0.25s;
+  outline: none;
+  background: #fafafa;
+}
+
+.checkout-campo input:focus {
+  border-color: #ae40f0;
+  background: #fff;
+}
+
+.checkout-campo input.error {
+  border-color: #dc3545;
+  background: #fff5f5;
+}
+
+.checkout-campo .error-msg {
+  display: none;
+  color: #dc3545;
+  font-size: 0.78rem;
+  margin-top: 4px;
+}
+
+.checkout-campo .error-msg.visible {
+  display: block;
+}
+
+.checkout-submit {
+  width: 100%;
+  padding: 15px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  color: #fff;
+  background: linear-gradient(135deg, #3c122c, #762ba3, #ae40f0);
+  transition: opacity 0.25s, transform 0.15s;
+  margin-top: 6px;
+}
+
+.checkout-submit:hover {
+  opacity: 0.92;
+  transform: translateY(-1px);
+}
+
+.checkout-success {
+  text-align: center;
+  padding: 10px 0;
+}
+
+.checkout-success h2 {
+  color: #00b090;
+  margin: 16px 0 8px;
+}
+
+.checkout-success p {
+  color: #555;
+  font-size: 0.95rem;
+  margin: 4px 0;
+}

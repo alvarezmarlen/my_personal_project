@@ -256,10 +256,10 @@
         {
             "id": 24,
             "slug": "pulsera-colores-cruz",
-            "categoria": "Pulsera Colores & Cruz",
+            "categoria": "Pulseras",
             "productName": "Pulsera Colores & Cruz",
             "imagen": "../assets/img/catalogo/PulseraCruz01.png",
-            "precio": 8,
+            "precio": 20,
             "descripcion": "Pieza artesanal con mostacillas y nylon de alta resistencia.",
             "materiales": "Nylon, Cristal, Acero",
             "stock": 1
@@ -267,10 +267,10 @@
         {
             "id": 25,
             "slug": "pulsera-fresa-abalorios",
-            "categoria": "Pulsera abalorios Fresa",
+            "categoria": "Pulseras",
             "productName": "Pulsera Fresa abalorios",
             "imagen": "../assets/img/catalogo/PulseraFrutilla02.png",
-            "precio": 8,
+            "precio": 5,
             "descripcion": "Pieza artesanal con mostacillas y nylon de alta resistencia.",
             "materiales": "Nylon, Cristal, Acero",
             "stock": 1
@@ -292,7 +292,7 @@
             "categoria": "Pulseras",
             "productName": "Pulsera Verde & Botón ",
             "imagen": "../assets/img/catalogo/PulseraVerde-conBoton05.png",
-            "precio": 8,
+            "precio": 9,
             "descripcion": "Pieza artesanal con mostacillas y nylon de alta resistencia.",
             "materiales": "Nylon, Cristal, Acero",
             "stock": 1

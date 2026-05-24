@@ -31,7 +31,7 @@ export function mostrarCategorias(listaCategorias, idCategorias) {
         link.href = item.enlace;
         
         link.innerHTML = `
-            <img src="${item.imagen}" alt="${item.categoria}">
+            <img src="${item.imagen}" alt="${item.categoria}" loading="lazy">
                 <div class="etiqueta-contenedor">
                     <h3>${item.categoria}</h3>
                 </div>
@@ -65,7 +65,7 @@ export function mostrarMasVisitados(listaProductos, idContenedor) {
 
         // 2. Insertamos la estructura interna
         tarjeta.innerHTML = `
-            <img src="${prod.imagen}" alt="${prod.productName}">
+            <img src="${prod.imagen}" alt="${prod.productName}" loading="lazy">
             <h5>${prod.productName}</h5>
             <span>${prod.precio.toFixed(2)}€</span>
         `;
@@ -83,6 +83,11 @@ export function mostrarProductos(listaProductos, contenedorId) {
     if (!contenedor) return;
     contenedor.innerHTML = "";
 
+    if (listaProductos.length === 0) {
+        contenedor.innerHTML = '<p style="grid-column:1/-1;text-align:center;padding:60px 0;color:#999;">No se encontraron productos.</p>';
+        return;
+    }
+
     listaProductos.forEach(producto => {
     const card = document.createElement('a');
     card.classList.add('producto-card');
@@ -90,7 +95,7 @@ export function mostrarProductos(listaProductos, contenedorId) {
 
     card.innerHTML = `
         <div class="producto-imagen">
-                <img src="${producto.imagen}" alt="${producto.productName}">
+                <img src="${producto.imagen}" alt="${producto.productName}" loading="lazy">
         </div>
         <div class="producto-info">
             <h3>${producto.productName}</h3>
@@ -112,6 +117,68 @@ export function mostrarProductos(listaProductos, contenedorId) {
 /* ---------------------------------------------------------
     5. PINTAR LAS TARJETAS DE DETALLES 
 -----------------------------------------------------------*/
+export function inicializarVolverArriba() {
+    const btn = document.createElement('button');
+    btn.id = 'btn-volver-arriba';
+    btn.textContent = '↑';
+    btn.style.cssText = `
+        position:fixed; bottom:30px; right:30px; width:44px; height:44px;
+        background:#3c122c; color:#fff; border:none; border-radius:50%;
+        font-size:1.2rem; cursor:pointer; z-index:9998;
+        box-shadow:0 4px 15px rgba(0,0,0,0.15);
+        opacity:0; transform:translateY(20px);
+        transition:opacity 0.3s, transform 0.3s;
+        pointer-events:none;
+    `;
+    document.body.appendChild(btn);
+
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 400) {
+            btn.style.opacity = '1';
+            btn.style.transform = 'translateY(0)';
+            btn.style.pointerEvents = 'auto';
+        } else {
+            btn.style.opacity = '0';
+            btn.style.transform = 'translateY(20px)';
+            btn.style.pointerEvents = 'none';
+        }
+    });
+
+    btn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+}
+
+export function mostrarToast(mensaje, tipo = 'exito') {
+    const existing = document.querySelector('.toast-global');
+    if (existing) existing.remove();
+
+    const toast = document.createElement('div');
+    toast.className = 'toast-global';
+    toast.textContent = mensaje;
+    toast.style.cssText = `
+        position:fixed; bottom:30px; left:50%; transform:translateX(-50%) translateY(20px);
+        background:${tipo === 'exito' ? '#00b090' : '#555'}; color:#fff;
+        padding:14px 28px; border-radius:8px; font-family:Montserrat,sans-serif;
+        font-size:0.95rem; font-weight:600; z-index:99999;
+        box-shadow:0 4px 20px rgba(0,0,0,0.15);
+        opacity:0; transition:opacity 0.3s, transform 0.3s;
+        pointer-events:none;
+    `;
+    document.body.appendChild(toast);
+
+    requestAnimationFrame(() => {
+        toast.style.opacity = '1';
+        toast.style.transform = 'translateX(-50%) translateY(0)';
+    });
+
+    setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateX(-50%) translateY(20px)';
+        setTimeout(() => toast.remove(), 300);
+    }, 3000);
+}
+
 export function mostrarDetalle(producto, contenedorId) {
     const contenedor = document.getElementById(contenedorId);
     contenedor.innerHTML = ""; // Limpiamos por si hay algo antes
@@ -122,7 +189,7 @@ export function mostrarDetalle(producto, contenedorId) {
 
     detalle.innerHTML = `
         <div class="producto-imagen">
-            <img src="${producto.imagen}" alt="${producto.productName}">
+            <img src="${producto.imagen}" alt="${producto.productName}" loading="lazy">
         </div>
         <div class="producto-info">
             <h3>${producto.productName}</h3>

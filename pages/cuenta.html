@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Marlen Alvarez"/>
+    <meta name="description" content="Bellas prendas artesanales, para usar cada dia, luciendo elegante, bella y juvenil, regala con satisfaccion y acierto">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'><script src="https://kit.fontawesome.com/384e83612b.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../assets/css/cuenta.css">
+    <title>Store Sumi.chh | Mi Cuenta</title>
+</head>
+<body>
+    <div id="nav-placeholder"></div>
+
+    <main id="contenedor-cuenta">
+        <div class="categoria-cabecera">
+            <h1>Mi Cuenta</h1>
+            <div class="linea-decorativa"></div>
+        </div>
+
+        <div class="cuenta-grid">
+            <section class="cuenta-perfil tarjeta-blanca">
+                <h2>Datos personales</h2>
+                <div id="perfil-info">
+                    <p><strong>Nombre:</strong> <span id="perfil-nombre"></span></p>
+                    <p><strong>Email:</strong> <span id="perfil-email"></span></p>
+                </div>
+                <button class="boton-enviar" id="btn-cerrar-sesion" style="margin-top:20px;">Cerrar sesión</button>
+            </section>
+
+            <section class="cuenta-pedidos tarjeta-blanca">
+                <h2>Mis pedidos</h2>
+                <div id="pedidos-lista">
+                    <p class="sin-pedidos">Aún no has realizado ningún pedido.</p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script type="module" src="../assets/js/main.js"></script>
+</body>
+</html>

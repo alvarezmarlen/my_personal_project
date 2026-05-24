@@ -265,6 +265,200 @@ body {
   color: #2b181d;
 }
 
+/* =========================================================
+   MODAL CHECKOUT
+========================================================= */
+.checkout-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+    animation: overlayFadeIn 0.25s ease;
+}
+
+.checkout-overlay.active {
+    display: flex;
+}
+
+.checkout-modal {
+    background: #fff;
+    border-radius: 16px;
+    padding: 40px 36px 36px;
+    width: 90%;
+    max-width: 440px;
+    position: relative;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+    animation: modalSlideUp 0.3s ease;
+}
+
+.checkout-close {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    background: none;
+    border: none;
+    font-size: 1.6rem;
+    color: #999;
+    cursor: pointer;
+    transition: color 0.2s;
+    line-height: 1;
+}
+
+.checkout-close:hover {
+    color: #2b181d;
+}
+
+.checkout-modal h2 {
+    margin: 0 0 24px;
+    color: #2b181d;
+    font-weight: 600;
+    font-size: 1.3rem;
+    text-align: center;
+}
+
+.checkout-campo {
+    margin-bottom: 18px;
+}
+
+.checkout-campo label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #444;
+}
+
+.checkout-campo input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    color: #333;
+    transition: border-color 0.25s;
+    outline: none;
+    background: #fafafa;
+}
+
+.checkout-campo input:focus {
+    border-color: #ae40f0;
+    background: #fff;
+}
+
+.checkout-campo input.error {
+    border-color: #dc3545;
+    background: #fff5f5;
+}
+
+.checkout-campo .error-msg {
+    display: none;
+    color: #dc3545;
+    font-size: 0.78rem;
+    margin-top: 4px;
+}
+
+.checkout-campo .error-msg.visible {
+    display: block;
+}
+
+.checkout-submit {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    color: #fff;
+    background: linear-gradient(135deg, #3c122c, #762ba3, #ae40f0);
+    transition: opacity 0.25s, transform 0.15s;
+    margin-top: 6px;
+}
+
+.checkout-submit:hover {
+    opacity: 0.92;
+    transform: translateY(-1px);
+}
+
+.checkout-submit:active {
+    transform: translateY(0);
+}
+
+/* Success view */
+.checkout-success {
+    text-align: center;
+    padding: 10px 0;
+}
+
+.checkout-success h2 {
+    color: #00b090;
+    margin: 16px 0 8px;
+}
+
+.checkout-success p {
+    color: #555;
+    font-size: 0.95rem;
+    margin: 4px 0;
+}
+
+.checkout-success .success-detalle {
+    font-size: 0.85rem;
+    color: #999;
+    margin-top: 10px;
+}
+
+/* Checkmark animation */
+.checkmark-container {
+    text-align: center;
+    margin: 0 auto;
+}
+
+.checkmark {
+    width: 72px;
+    height: 72px;
+}
+
+.checkmark-circle {
+    stroke: #00b090;
+    stroke-width: 2;
+    stroke-dasharray: 166;
+    stroke-dashoffset: 166;
+    animation: strokeDraw 0.6s ease forwards;
+}
+
+.checkmark-check {
+    stroke: #00b090;
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 48;
+    stroke-dashoffset: 48;
+    animation: strokeDraw 0.35s 0.6s ease forwards;
+}
+
+@keyframes strokeDraw {
+    to { stroke-dashoffset: 0; }
+}
+
+@keyframes overlayFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes modalSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.96);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
 /* 📱 RESPONSIVE: Para que en móviles se vea una sola columna */
 @media (max-width: 768px) {
   #contenedor-carrito {

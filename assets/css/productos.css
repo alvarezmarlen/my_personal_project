@@ -128,3 +128,56 @@
     background-color: var(--pink); /* Tu rosa característico */
     margin: 10px auto 0 auto;
 }
+
+.filtros-bar {
+    max-width: 1200px;
+    margin: 20px auto 0;
+    padding: 0 40px;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.filtros-bar select {
+    padding: 10px 14px;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    font-family: Montserrat, sans-serif;
+    font-size: 0.9rem;
+    color: #555;
+    background: #fff;
+    cursor: pointer;
+    outline: none;
+}
+
+.filtros-bar select:focus {
+    border-color: var(--light-purple);
+}
+
+.spinner {
+    display: none;
+    text-align: center;
+    padding: 80px 0;
+    color: #999;
+    font-size: 0.95rem;
+}
+
+.spinner::before {
+    content: '';
+    display: block;
+    width: 36px;
+    height: 36px;
+    margin: 0 auto 12px;
+    border: 3px solid #eee;
+    border-top-color: var(--dark-purple);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.spinner.visible {
+    display: block;
+}

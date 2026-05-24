@@ -2,11 +2,14 @@
    1. IMPORTACIONES (Traemos solo los jefes de sección)
 ========================================================= */
 import { obtenerDatos } from "./modules/api.js";
-import { cargarComponentes, mostrarCategorias, mostrarMasVisitados } from "./modules/ui.js";
+import { cargarComponentes, mostrarCategorias, mostrarMasVisitados, inicializarVolverArriba } from "./modules/ui.js";
 import { cargarSeccionProductos, cargarSeccionDetalle } from "./modules/productos.js";
-import { actualizarContadorNav } from "./modules/nav.js";
+import { actualizarContadorNav, actualizarNavSesion, inicializarBusqueda, inicializarEnlacesPendientes } from "./modules/nav.js";
 import { renderizarCarrito } from "./modules/pagCarrito.js";
 import { iniciarBanner } from "./modules/banner.js";
+import { inicializarLogin, inicializarRegistro, inicializarOlvidePassword } from "./modules/auth.js";
+import { inicializarContacto } from "./modules/contacto.js";
+import { inicializarCuenta } from "./modules/cuenta.js";
 
 /* =========================================================
    2. FUNCIONES DE PÁGINA COMÚN E INICIO
@@ -32,7 +35,12 @@ async function inicializarPagina() {
 /* =========================================================
    3. CONTROL DE EJECUCIÓN (Enrutador por URL)
 ========================================================= */
-prepararPaginaComun();
+prepararPaginaComun().then(() => {
+    actualizarNavSesion();
+    inicializarBusqueda();
+    inicializarEnlacesPendientes();
+    inicializarVolverArriba();
+});
 
 const pagina = window.location.pathname.split('/').pop() || 'index.html';
 
@@ -47,4 +55,19 @@ if (pagina === 'index.html') {
     cargarSeccionDetalle();
 } else if (pagina === 'carrito.html') {
     renderizarCarrito();
+} else if (pagina === 'login.html') {
+    inicializarLogin();
+    inicializarOlvidePassword();
+} else if (pagina === 'registro.html') {
+    inicializarRegistro();
+} else if (pagina === 'contacto.html') {
+    inicializarContacto();
+} else if (pagina === 'cuenta.html') {
+    inicializarCuenta();
+} else if (['nosotros.html'].includes(pagina)) {
+} else {
+    const rutasValidas = ['index.html', 'productos.html', 'detalle.html', 'carrito.html', 'login.html', 'registro.html', 'contacto.html', 'cuenta.html', 'nosotros.html'];
+    if (!rutasValidas.includes(pagina)) {
+        window.location.href = window.location.pathname.includes('/pages/') ? './404.html' : './pages/404.html';
+    }
 }
