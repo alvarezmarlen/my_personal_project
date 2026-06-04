@@ -23,7 +23,7 @@ function aplicarFiltros(productos) {
     let resultado = [...productos];
 
     if (selectCat && selectCat.value) {
-        resultado = resultado.filter(p => p.categoria === selectCat.value);
+        resultado = resultado.filter(p => p.categoria_id === parseInt(selectCat.value));
     }
 
     if (selectOrd && selectOrd.value) {
@@ -41,18 +41,22 @@ function aplicarFiltros(productos) {
     return resultado;
 }
 
-function inicializarFiltros(datos, productosIniciales) {
+async function inicializarFiltros(productosIniciales) {
     const selectCat = document.getElementById('filtro-categoria');
     const selectOrd = document.getElementById('filtro-orden');
     if (!selectCat) return;
 
-    const categorias = [...new Set(datos.productos.map(p => p.categoria))];
-    categorias.forEach(cat => {
-        const opt = document.createElement('option');
-        opt.value = cat;
-        opt.textContent = cat;
-        selectCat.appendChild(opt);
-    });
+    try {
+        const categorias = await api.getCategorias();
+        categorias.forEach(cat => {
+            const opt = document.createElement('option');
+            opt.value = cat.id;
+            opt.textContent = cat.nombre;
+            selectCat.appendChild(opt);
+        });
+    } catch (error) {
+        console.warn("No se pudieron cargar categorías para el filtro:", error);
+    }
 
     const params = new URLSearchParams(window.location.search);
     if (params.get('categoria')) selectCat.value = params.get('categoria');
@@ -90,7 +94,7 @@ export async function cargarSeccionProductos() {
                 : categoriaSeleccionada || 'Nuestro Catálogo';
         }
 
-        inicializarFiltros(productos, productos);
+        await inicializarFiltros(productos);
         mostrarProductos(productos, 'container-productos');
         reasignarBotones();
 

@@ -34,6 +34,7 @@ export async function renderizarCarrito() {
     carrito.forEach(producto => {
         // Adaptación técnica: la API puede devolver 'producto_id' o 'id'
         const idProducto = producto.id || producto.producto_id;
+        const nombreProducto = producto.nombre || producto.productName;
         const subtotalProducto = parseFloat(producto.precio) * producto.cantidad;
         totalAcumulado += subtotalProducto;
 
@@ -41,9 +42,9 @@ export async function renderizarCarrito() {
 
         contenedorProductos.innerHTML += `
             <div class="tarjeta-producto-carrito" data-id="${escapar(idProducto)}">
-                <img src="${escapar(rutaImagen)}" alt="${escapar(producto.productName)}" class="img-producto-carrito">
+                <img src="${escapar(rutaImagen)}" alt="${escapar(nombreProducto)}" class="img-producto-carrito">
                 <div class="info-producto-carrito">
-                    <h3>${escapar(producto.productName)}</h3>
+                    <h3>${escapar(nombreProducto)}</h3>
                     <p class="precio-unitario">${parseFloat(producto.precio).toFixed(2)}€</p>
                 </div>
                 <div class="cantidad-control">
@@ -129,7 +130,7 @@ function asignarEventosBotones() {
             const id = tarjeta.dataset.id;
             const producto = carrito.find(item => (item.id || item.producto_id) == id);
 
-            if (confirm(`¿Seguro que deseas quitar "${producto.productName}" de tu cesta?`)) {
+            if (confirm(`¿Seguro que deseas quitar "${producto.nombre || producto.productName}" de tu cesta?`)) {
                 if (estaLogueado()) {
                     try {
                         // Sincronizamos con el endpoint DELETE /api/carrito/<id> de Flask

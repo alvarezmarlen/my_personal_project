@@ -18,6 +18,14 @@ export async function cargarComponentes(idContenedor, rutaArchivo) {
 /* ---------------------------------------------------------
    2. PINTAR LAS CATEGORIAS EN EL INICIO
 -----------------------------------------------------------*/
+const CATEGORY_IMAGES = {
+    "Pendientes": "assets/img/catalogo/pendientesCrucifijos1.png",
+    "Collares": "assets/img/catalogo/CollarFrutilla-abalorios02.png",
+    "Pulseras": "assets/img/catalogo/PulseraCruz01.png",
+    "Colgantes para móvil": "assets/img/catalogo/ColganteMovil-Murcielago8.png",
+    "Llaveros": "assets/img/catalogo/LlaveroPucca01.png"
+};
+
 export function mostrarCategorias(listaCategorias, idCategorias) {
     const contenedor = document.getElementById(idCategorias);
     if (!contenedor) return; // Seguridad
@@ -28,12 +36,12 @@ export function mostrarCategorias(listaCategorias, idCategorias) {
     listaCategorias.forEach(item => {
         const link = document.createElement('a');
         link.classList.add('tarjeta');
-        link.href = item.enlace;
+        link.href = `pages/productos.html?categoria=${item.id}`;
         
         link.innerHTML = `
-            <img src="${item.imagen}" alt="${item.categoria}" loading="lazy">
+            ${(item.imagen || CATEGORY_IMAGES[item.nombre]) ? `<img src="${item.imagen || CATEGORY_IMAGES[item.nombre]}" alt="${item.nombre}" loading="lazy">` : ''}
                 <div class="etiqueta-contenedor">
-                    <h3>${item.categoria}</h3>
+                    <h3>${item.nombre}</h3>
                 </div>
         `;
     contenedor.appendChild(link);
@@ -65,8 +73,8 @@ export function mostrarMasVisitados(listaProductos, idContenedor) {
 
         // 2. Insertamos la estructura interna
         tarjeta.innerHTML = `
-            <img src="${prod.imagen}" alt="${prod.productName}" loading="lazy">
-            <h5>${prod.productName}</h5>
+            <img src="${prod.imagen}" alt="${prod.nombre}" loading="lazy">
+            <h5>${prod.nombre}</h5>
             <span>${prod.precio.toFixed(2)}€</span>
         `;
         
@@ -95,15 +103,15 @@ export function mostrarProductos(listaProductos, contenedorId) {
 
     card.innerHTML = `
         <div class="producto-imagen">
-                <img src="${producto.imagen}" alt="${producto.productName}" loading="lazy">
+                <img src="${producto.imagen}" alt="${producto.nombre}" loading="lazy">
         </div>
         <div class="producto-info">
-            <h3>${producto.productName}</h3>
+            <h3>${producto.nombre}</h3>
               <p class="precio">${producto.precio.toFixed(2)}€</p>
             <button data-id="${producto.id}"
                 type='button'
                 class="btn-comprar" 
-                data-label="${producto.productName}"
+                data-label="${producto.nombre}"
                 data-price="${producto.precio}"
                 data-image="${producto.imagen}"
                 >Añadir a la cesta</button>
@@ -189,17 +197,17 @@ export function mostrarDetalle(producto, contenedorId) {
 
     detalle.innerHTML = `
         <div class="producto-imagen">
-            <img src="${producto.imagen}" alt="${producto.productName}" loading="lazy">
+            <img src="${producto.imagen}" alt="${producto.nombre}" loading="lazy">
         </div>
         <div class="producto-info">
-            <h3>${producto.productName}</h3>
+            <h3>${producto.nombre}</h3>
             <p class="precio">${producto.precio.toFixed(2)}€</p>
             <p class="producto-stock">🟢 Stock: ${producto.stock}</p>
 
             <button data-id="${producto.id}"
                 type='button'
                 class="btn-comprar" 
-                data-label="${producto.productName}"
+                data-label="${producto.nombre}"
                 data-price="${producto.precio}"
                 data-image="${producto.imagen}"
                 >Añadir a la cesta</button>

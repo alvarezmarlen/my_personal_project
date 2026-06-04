@@ -50,8 +50,9 @@ export async function inicializarCuenta() {
         // Renderizamos las tarjetas mapeando los datos reales del backend
         lista.innerHTML = pedidos.map(p => {
             // El backend devuelve los productos como un array de objetos
-            const textoProductos = p.productos && Array.isArray(p.productos)
-                ? p.productos.map(prod => `${escapar(prod.productName || prod.nombre)} x${escapar(prod.cantidad)}`).join(', ')
+            const itemsPedido = p.articulos || p.productos;
+            const textoProductos = itemsPedido && Array.isArray(itemsPedido)
+                ? itemsPedido.map(prod => `${escapar(prod.nombre || prod.productName)} x${escapar(prod.cantidad)}`).join(', ')
                 : 'Productos en este pedido';
 
             // Formateamos la fecha si viene en formato ISO, o usamos la que nos da el backend
