@@ -52,22 +52,52 @@
             <button class="checkout-close" id="checkout-close">&times;</button>
 
             <div id="checkout-form-view">
-                <h2>Datos de Envío</h2>
+                <h2>Finalizar Compra</h2>
                 <form id="checkout-form" novalidate>
-                    <div class="checkout-campo">
-                        <label for="checkout-nombre">Nombre completo *</label>
-                        <input type="text" id="checkout-nombre" name="nombre" required placeholder="María García">
-                        <span class="error-msg"></span>
-                    </div>
-                    <div class="checkout-campo">
-                        <label for="checkout-email">Correo electrónico *</label>
-                        <input type="email" id="checkout-email" name="email" required placeholder="maria@ejemplo.com">
-                        <span class="error-msg"></span>
-                    </div>
-                    <div class="checkout-campo">
-                        <label for="checkout-direccion">Dirección de envío *</label>
-                        <input type="text" id="checkout-direccion" name="direccion" required placeholder="Calle Mayor 12, 28001 Madrid">
-                        <span class="error-msg"></span>
+                    <div class="checkout-form-grid">
+                        <div class="checkout-col-izq">
+                            <h3 class="checkout-col-header">Datos de Envío</h3>
+                            <div class="checkout-campo">
+                                <label for="checkout-nombre">Nombre completo *</label>
+                                <input type="text" id="checkout-nombre" name="nombre" required placeholder="María García">
+                                <span class="error-msg"></span>
+                            </div>
+                            <div class="checkout-campo">
+                                <label for="checkout-email">Correo electrónico *</label>
+                                <input type="email" id="checkout-email" name="email" required placeholder="maria@ejemplo.com">
+                                <span class="error-msg"></span>
+                            </div>
+                            <div class="checkout-campo">
+                                <label for="checkout-direccion">Dirección de envío *</label>
+                                <input type="text" id="checkout-direccion" name="direccion" required placeholder="Calle Mayor 12, 28001 Madrid">
+                                <span class="error-msg"></span>
+                            </div>
+                        </div>
+                        <div class="checkout-col-der">
+                            <h3 class="checkout-col-header">Método de Pago</h3>
+                            <label class="metodo-pago">
+                                <input type="radio" name="metodo-pago" value="paypal">
+                                <span class="metodo-icono">💳</span>
+                                <span class="metodo-nombre">PayPal</span>
+                            </label>
+                            <label class="metodo-pago">
+                                <input type="radio" name="metodo-pago" value="tarjeta-credito">
+                                <span class="metodo-icono">💳</span>
+                                <span class="metodo-nombre">Tarjeta de Crédito</span>
+                            </label>
+                            <div class="tarjeta-campos" id="campos-tarjeta">
+                                <input type="text" placeholder="Número de tarjeta" maxlength="19">
+                                <div class="tarjeta-fila">
+                                    <input type="text" placeholder="MM/AA" maxlength="5">
+                                    <input type="text" placeholder="CVV" maxlength="4">
+                                </div>
+                            </div>
+                            <label class="metodo-pago">
+                                <input type="radio" name="metodo-pago" value="tarjeta-debito">
+                                <span class="metodo-icono">💳</span>
+                                <span class="metodo-nombre">Tarjeta de Débito</span>
+                            </label>
+                        </div>
                     </div>
                     <button type="submit" class="checkout-submit">Confirmar Pedido</button>
                 </form>

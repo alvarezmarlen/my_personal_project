@@ -288,7 +288,7 @@ body {
     border-radius: 16px;
     padding: 40px 36px 36px;
     width: 90%;
-    max-width: 440px;
+    max-width: 800px;
     position: relative;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
     animation: modalSlideUp 0.3s ease;
@@ -317,6 +317,106 @@ body {
     font-weight: 600;
     font-size: 1.3rem;
     text-align: center;
+}
+
+.checkout-form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+}
+
+.checkout-col-header {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #2b181d;
+    margin: 0 0 18px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #f0e0e0;
+}
+
+.checkout-col-der .checkout-col-header {
+    margin-top: 0;
+}
+
+/* --- Método de Pago --- */
+.metodo-pago {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-bottom: 10px;
+    background: #fafafa;
+}
+
+.metodo-pago:hover {
+    border-color: #ae40f0;
+    background: #f5f0ff;
+}
+
+.metodo-pago input[type="radio"] {
+    accent-color: #ae40f0;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.metodo-pago .metodo-icono {
+    font-size: 1.4rem;
+    width: 32px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.metodo-pago .metodo-nombre {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #333;
+}
+
+/* --- Campos de tarjeta (ocultos por defecto) --- */
+.tarjeta-campos {
+    display: none;
+    padding: 16px 16px 8px;
+    margin: -5px 0 15px 0;
+    border: 2px solid #e0e0e0;
+    border-top: none;
+    border-radius: 0 0 10px 10px;
+    background: #fafafa;
+}
+
+.tarjeta-campos.visible {
+    display: block;
+}
+
+.tarjeta-campos input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    outline: none;
+    background: #fff;
+    transition: border-color 0.2s;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+.tarjeta-campos input:focus {
+    border-color: #ae40f0;
+}
+
+.tarjeta-fila {
+    display: flex;
+    gap: 10px;
+}
+
+.tarjeta-fila input {
+    flex: 1;
 }
 
 .checkout-campo {
@@ -480,5 +580,12 @@ body {
     justify-content: space-between;
     border-top: 1px solid #eee;
     padding-top: 10px;
+  }
+}
+
+@media (max-width: 640px) {
+  .checkout-form-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
   }
 }

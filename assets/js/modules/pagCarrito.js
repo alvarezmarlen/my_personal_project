@@ -164,9 +164,29 @@ const formView = document.getElementById('checkout-form-view');
 const successView = document.getElementById('checkout-success-view');
 const successNombre = document.getElementById('success-nombre');
 
-if (closeBtn) { closeBtn.onclick = cerrarCheckout; }
+if (closeBtn) {
+    closeBtn.onclick = () => {
+        if (successView.style.display === 'block') {
+            window.location.href = '../index.html';
+        } else {
+            cerrarCheckout();
+        }
+    };
+}
 if (overlay) { overlay.onclick = (e) => { if (e.target === overlay) cerrarCheckout(); }; }
 if (form) { form.onsubmit = manejarEnvio; }
+
+// Mostrar/ocultar campos de tarjeta según método de pago seleccionado
+document.querySelectorAll('input[name="metodo-pago"]').forEach(radio => {
+    radio.addEventListener('change', () => {
+        const campos = document.getElementById('campos-tarjeta');
+        if (radio.value === 'tarjeta-credito' || radio.value === 'tarjeta-debito') {
+            campos.classList.add('visible');
+        } else {
+            campos.classList.remove('visible');
+        }
+    });
+});
 
 async function abrirCheckout() {
     const carrito = await getCart();
@@ -224,10 +244,7 @@ async function manejarEnvio(e) {
 
         // Limpiamos el carrito local al completarse con éxito
         localStorage.removeItem('carrito');
-
-        setTimeout(() => {
-            window.location.href = '../pages/cuenta.html';
-        }, 2000);
+        actualizarContadorNav();
 
     } catch (error) {
         console.error("No se pudo crear el pedido en el servidor:", error);
