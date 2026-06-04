@@ -116,6 +116,14 @@
   border-color: #f7d6d6;     /* Conserva el borde rosa sutil */
 }
 
+.btn-sin-stock {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+  background-color: #e0e0e0 !important;
+  border-color: #ccc !important;
+}
+
 /* --- Bloque de Detalles Adicionales (Abajo) --- */
 .producto-detalles-adicionales {
   margin-top: 5px;

@@ -31,6 +31,22 @@ export async function iniciarSesion(email, password) {
             email: respuesta.usuario.email
         }));
 
+        // Migrar carrito anónimo (localStorage) al servidor
+        const carritoAnonimo = JSON.parse(localStorage.getItem('carrito') || '[]');
+        if (carritoAnonimo.length > 0) {
+            try {
+                for (const item of carritoAnonimo) {
+                    await api.addCarrito({
+                        producto_id: item.producto_id || item.id,
+                        cantidad: item.cantidad
+                    });
+                }
+                localStorage.removeItem('carrito');
+            } catch (err) {
+                console.warn('No se pudo migrar el carrito anónimo:', err);
+            }
+        }
+
         return { exito: true };
     } catch (error) {
         return { exito: false, error: error.message || 'Email o contraseña incorrectos' };

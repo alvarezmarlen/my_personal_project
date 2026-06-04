@@ -98,6 +98,7 @@ export function mostrarProductos(listaProductos, contenedorId) {
 
     listaProductos.forEach(producto => {
     const card = document.createElement('a');
+    const sinStock = producto.stock <= 0;
     card.classList.add('producto-card');
     card.href = `detalle.html?id=${producto.id}`
 
@@ -110,11 +111,12 @@ export function mostrarProductos(listaProductos, contenedorId) {
               <p class="precio">${producto.precio.toFixed(2)}€</p>
             <button data-id="${producto.id}"
                 type='button'
-                class="btn-comprar" 
+                class="btn-comprar${sinStock ? ' btn-sin-stock' : ''}"
                 data-label="${producto.nombre}"
                 data-price="${producto.precio}"
                 data-image="${producto.imagen}"
-                >Añadir a la cesta</button>
+                ${sinStock ? 'disabled' : ''}
+                >${sinStock ? 'SIN STOCK' : 'Añadir a la cesta'}</button>
         </div>
     `;
         contenedor.appendChild(card);
@@ -195,6 +197,7 @@ export function mostrarDetalle(producto, contenedorId) {
     const detalle = document.createElement('div');
     detalle.classList.add('producto-detalle');
 
+    const sinStock = producto.stock <= 0;
     detalle.innerHTML = `
         <div class="producto-imagen">
             <img src="${producto.imagen}" alt="${producto.nombre}" loading="lazy">
@@ -202,15 +205,16 @@ export function mostrarDetalle(producto, contenedorId) {
         <div class="producto-info">
             <h3>${producto.nombre}</h3>
             <p class="precio">${producto.precio.toFixed(2)}€</p>
-            <p class="producto-stock">🟢 Stock: ${producto.stock}</p>
+            <p class="producto-stock" style="color:${sinStock ? '#cc0000' : '#2e7d32'}">${sinStock ? '🔴 Sin stock' : `🟢 Stock: ${producto.stock}`}</p>
 
             <button data-id="${producto.id}"
                 type='button'
-                class="btn-comprar" 
+                class="btn-comprar${sinStock ? ' btn-sin-stock' : ''}"
                 data-label="${producto.nombre}"
                 data-price="${producto.precio}"
                 data-image="${producto.imagen}"
-                >Añadir a la cesta</button>
+                ${sinStock ? 'disabled' : ''}
+                >${sinStock ? 'SIN STOCK' : 'Añadir a la cesta'}</button>
             <div class="producto-detalles-adicionales">
                 <p class="producto-descripcion">${producto.descripcion || 'Sin descripción disponible.'}</p>
                 <p class="producto-materiales"><strong>Materiales:</strong> ${producto.materiales || 'No especificados.'}</p>

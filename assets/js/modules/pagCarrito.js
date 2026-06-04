@@ -96,7 +96,7 @@ function asignarEventosBotones() {
                         await api.updateCarrito(id, { cantidad: producto.cantidad });
                     } catch (err) { console.error("Error al actualizar cantidad en el servidor:", err); }
                 }
-                guardarYRefrescar();
+                await guardarYRefrescar();
             }
         };
     });
@@ -117,7 +117,7 @@ function asignarEventosBotones() {
                         await api.updateCarrito(id, { cantidad: producto.cantidad });
                     } catch (err) { console.error("Error al restar cantidad en el servidor:", err); }
                 }
-                guardarYRefrescar();
+                await guardarYRefrescar();
             }
         };
     });
@@ -139,15 +139,15 @@ function asignarEventosBotones() {
                 }
                 carrito = carrito.filter(item => (item.id || item.producto_id) != id);
                 setCart(carrito);
-                guardarYRefrescar();
+                await guardarYRefrescar();
             }
         };
     });
 }
 
-function guardarYRefrescar() {
+async function guardarYRefrescar() {
     saveCart();
-    renderizarCarrito();
+    await renderizarCarrito();
     actualizarContadorNav();
 }
 
@@ -226,7 +226,7 @@ async function manejarEnvio(e) {
         localStorage.removeItem('carrito');
 
         setTimeout(() => {
-            window.location.href = '../index.html';
+            window.location.href = '../pages/cuenta.html';
         }, 2000);
 
     } catch (error) {

@@ -78,6 +78,11 @@ export async function cargarSeccionProductos() {
         const categoriaSeleccionada = parametros.get('categoria');
         const buscarTermino = parametros.get('buscar');
 
+        // Ocultar filtros si viene de una categoría específica
+        const filtrosBar = document.getElementById('filtros-bar');
+        if (filtrosBar) {
+            filtrosBar.style.display = categoriaSeleccionada ? 'none' : '';
+        }
 
         // Preparamos los filtros que le enviaremos a la API si existen
         const filtros = {};
@@ -89,12 +94,25 @@ export async function cargarSeccionProductos() {
 
         const cabecera = document.querySelector('.categoria-cabecera h1');
         if (cabecera) {
-            cabecera.textContent = buscarTermino
-                ? `Resultados para "${buscarTermino}"`
-                : categoriaSeleccionada || 'Nuestro Catálogo';
+            if (buscarTermino) {
+                cabecera.textContent = `Resultados para "${buscarTermino}"`;
+            } else if (categoriaSeleccionada) {
+                // Buscar el nombre real de la categoría desde la API
+                try {
+                    const categorias = await api.getCategorias();
+                    const cat = categorias.find(c => c.id == categoriaSeleccionada);
+                    cabecera.textContent = cat ? cat.nombre : 'Nuestro Catálogo';
+                } catch {
+                    cabecera.textContent = 'Nuestro Catálogo';
+                }
+            } else {
+                cabecera.textContent = 'Nuestro Catálogo';
+            }
         }
 
-        await inicializarFiltros(productos);
+        if (!categoriaSeleccionada) {
+            await inicializarFiltros(productos);
+        }
         mostrarProductos(productos, 'container-productos');
         reasignarBotones();
 

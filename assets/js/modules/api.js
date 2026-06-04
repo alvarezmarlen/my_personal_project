@@ -15,9 +15,29 @@ async function request(url, opciones = {}) {
     
     if (!res.ok) {
         const err = await res.json().catch(() => ({}));
+        if (res.status === 401) {
+            localStorage.removeItem('token');
+            localStorage.removeItem('sesion');
+            localStorage.removeItem('carrito');
+            mostrarModalSesionExpirada();
+        }
         throw new Error(err.message || 'Error del servidor');
     }
     return res.json();
+}
+
+function mostrarModalSesionExpirada() {
+    if (document.getElementById('modal-sesion-expirada')) return;
+    const modal = document.createElement('div');
+    modal.id = 'modal-sesion-expirada';
+    modal.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;z-index:99999;';
+    modal.innerHTML = `
+        <div style="background:#fff;padding:2rem 2.5rem;border-radius:16px;text-align:center;max-width:380px;box-shadow:0 8px 32px rgba(0,0,0,0.2);">
+            <p style="font-size:1.1rem;margin-bottom:1.5rem;color:#333;">⏳ Tu sesi&oacute;n ha expirado.<br>Inicia sesi&oacute;n de nuevo para continuar.</p>
+            <a href="../pages/login.html" style="display:inline-block;background:#f7d6d6;color:#333;padding:10px 28px;border-radius:25px;text-decoration:none;font-weight:bold;">Iniciar sesi&oacute;n</a>
+        </div>
+    `;
+    document.body.appendChild(modal);
 }
 
 // Exportamos el objeto 'api' con todos los endpoints centralizados

@@ -2,9 +2,21 @@ import { api } from "./api.js";
 import { estaLogueado } from "./auth.js";
 import { actualizarContadorNav } from "./nav.js";
 import { getCart, saveCart } from "./cartState.js";
+import { mostrarToast } from "./ui.js";
 
 // Convertimos la función en async porque hablar con el backend toma unos milisegundos
 export async function agregarAlCarrito(id, nombre, precio, imagenUrl) {
+    // Verificar stock disponible antes de agregar
+    try {
+        const producto = await api.getProducto(id);
+        if (producto.stock <= 0) {
+            mostrarToast('❌ Producto agotado, no hay stock disponible', 'error');
+            return;
+        }
+    } catch (e) {
+        console.warn("No se pudo verificar stock, se permite agregar igual:", e);
+    }
+
     const carrito = await getCart();  // Ahora getCart requiere un await
     const productoExistente = carrito.find(item => item.id === id);
 // 🛒 FASE 6: Si está logueado, informamos al backend en Docker

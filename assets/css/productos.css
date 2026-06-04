@@ -108,6 +108,13 @@
     border-bottom: 1px solid var(--pink); /* La línea se oscurece por completo */
 }
 
+.btn-sin-stock {
+    opacity: 0.4;
+    cursor: not-allowed;
+    pointer-events: none;
+    border-bottom-color: #ccc !important;
+}
+
 .categoria-cabecera {
     text-align: center;
     padding: 40px 0 10px 0;
