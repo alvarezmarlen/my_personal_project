@@ -1,4 +1,4 @@
-import { obtenerDatos } from "./api.js";
+import { api } from "./api.js";
 import { mostrarProductos, mostrarDetalle } from "./ui.js";
 import { agregarAlCarrito } from "./carrito.js";
 
@@ -67,24 +67,21 @@ function inicializarFiltros(datos, productosIniciales) {
     if (selectOrd) selectOrd.addEventListener('change', aplicar);
 }
 
+// 📦 Cargar catálogo general usando la nueva función oficial
 export async function cargarSeccionProductos() {
     try {
-        const datos = await obtenerDatos('../data/db.json');
         const parametros = new URLSearchParams(window.location.search);
         const categoriaSeleccionada = parametros.get('categoria');
         const buscarTermino = parametros.get('buscar');
 
-        let productosMostrar = datos.productos;
 
-        if (categoriaSeleccionada) {
-            productosMostrar = productosMostrar.filter(p => p.categoria === categoriaSeleccionada);
-        }
-        if (buscarTermino) {
-            const term = buscarTermino.toLowerCase();
-            productosMostrar = productosMostrar.filter(p =>
-                p.productName.toLowerCase().includes(term)
-            );
-        }
+        // Preparamos los filtros que le enviaremos a la API si existen
+        const filtros = {};
+        if (categoriaSeleccionada) filtros.categoria = categoriaSeleccionada;
+        if (buscarTermino) filtros.buscar = buscarTermino;
+
+        // Llamamos a la API usando la nueva estructura de la guía
+        const productos = await api.getProductos(filtros);
 
         const cabecera = document.querySelector('.categoria-cabecera h1');
         if (cabecera) {
@@ -93,8 +90,8 @@ export async function cargarSeccionProductos() {
                 : categoriaSeleccionada || 'Nuestro Catálogo';
         }
 
-        inicializarFiltros(datos, datos.productos);
-        mostrarProductos(productosMostrar, 'container-productos');
+        inicializarFiltros(productos, productos);
+        mostrarProductos(productos, 'container-productos');
         reasignarBotones();
 
     } catch (error) {
@@ -105,11 +102,11 @@ export async function cargarSeccionProductos() {
 // 📦 MÓDULO: Cargar la pantalla de detalle de un producto
 export async function cargarSeccionDetalle() {
     try {
-        const datos = await obtenerDatos('../data/db.json');
         const parametros = new URLSearchParams(window.location.search);
         const idBuscado = parametros.get('id');
 
-        const productoEncontrado = datos.productos.find(p => p.id == idBuscado);
+        // Llamamos al método getProducto de la API oficial
+        const productoEncontrado = await api.getProducto(idBuscado);
 
         if (!productoEncontrado) {
             document.getElementById('contenedor-detalle').innerHTML = '<p style="text-align:center;margin-top:40px;color:#777;">Producto no encontrado</p>';
@@ -117,22 +114,21 @@ export async function cargarSeccionDetalle() {
         }
 
         mostrarDetalle(productoEncontrado, 'contenedor-detalle');
-
         const botonComprar = document.querySelector('.btn-comprar');
         if (botonComprar) { 
             botonComprar.addEventListener('click', (evento) => {
                 evento.preventDefault();
                 evento.stopPropagation();
-
-                const id = evento.target.dataset.id;
-                const nombre = evento.target.dataset.label;
-                const precio = evento.target.dataset.price;
-                const imagen = evento.target.dataset.image;
-
-                agregarAlCarrito(id, nombre, precio, imagen);
+                agregarAlCarrito(
+                    evento.target.dataset.id,
+                    evento.target.dataset.label,
+                    evento.target.dataset.price,
+                    evento.target.dataset.image
+                );
             });
         }        
     } catch (error) {
         console.error("Error al cargar el detalle:", error);
+        document.getElementById('contenedor-detalle').innerHTML = '<p style="text-align:center;margin-top:40px;color:#cc0000;">Error al conectar con el servidor</p>';
     }
 }

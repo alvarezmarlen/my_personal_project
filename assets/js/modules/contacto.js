@@ -1,10 +1,12 @@
+import { api } from "./api.js"; // ← Importamos el asistente de la API oficial
 import { mostrarToast } from "./ui.js";
 
 export function inicializarContacto() {
     const form = document.querySelector('.formulario-contacto');
     if (!form) return;
 
-    form.addEventListener('submit', (e) => {
+    // Ponemos 'async' aquí porque enviar datos a la API toma unos milisegundos
+    form.addEventListener('submit', async (e) => {
         e.preventDefault();
 
         const nombre = document.getElementById('nombre').value.trim();
@@ -22,12 +24,22 @@ export function inicializarContacto() {
 
         if (!valido) return;
 
-        const mensajes = JSON.parse(localStorage.getItem('contactos') || '[]');
-        mensajes.push({ nombre, email, mensaje, fecha: new Date().toISOString() });
-        localStorage.setItem('contactos', JSON.stringify(mensajes));
+        try {
+            // 📨 FASE 6: Enviamos los datos reales al backend de Flask en Docker
+            await api.enviarContacto({ 
+                nombre, 
+                email, 
+                mensaje 
+            });
 
-        form.reset();
-        mostrarToast('¡Mensaje enviado con éxito!', 'exito');
+            // Si la API responde con éxito, limpiamos el formulario y avisamos al usuario
+            form.reset();
+            mostrarToast('¡Mensaje enviado con éxito al servidor! 🍓', 'exito');
+
+        } catch (error) {
+            console.error("Error al enviar el formulario de contacto:", error);
+            mostrarToast('Hubo un error al conectar con el servidor', 'error');
+        }
     });
 }
 

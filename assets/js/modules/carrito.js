@@ -1,10 +1,26 @@
+import { api } from "./api.js";
+import { estaLogueado } from "./auth.js";
 import { actualizarContadorNav } from "./nav.js";
 import { getCart, saveCart } from "./cartState.js";
 
-export function agregarAlCarrito(id, nombre, precio, imagenUrl) {
-    const carrito = getCart();
+// Convertimos la función en async porque hablar con el backend toma unos milisegundos
+export async function agregarAlCarrito(id, nombre, precio, imagenUrl) {
+    const carrito = await getCart();  // Ahora getCart requiere un await
     const productoExistente = carrito.find(item => item.id === id);
+// 🛒 FASE 6: Si está logueado, informamos al backend en Docker
+    if (estaLogueado()) {
+        try {
+            // Mandamos el producto_id y la cantidad al servidor
+            await api.addCarrito({
+                producto_id: id,
+                cantidad: 1
+            });
+        } catch (error) {
+            console.error("No se pudo sincronizar el producto con el backend:", error);
+        }
+    }
 
+    // Mantenemos la lógica de la interfaz en local para que todo se mueva rápido visualmente
     if (productoExistente) {
         productoExistente.cantidad++;
     } else {

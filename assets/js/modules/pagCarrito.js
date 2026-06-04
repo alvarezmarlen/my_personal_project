@@ -1,3 +1,4 @@
+import { api } from "./api.js"; // ← Importamos el asistente inteligente de la API
 import { actualizarContadorNav } from "./nav.js";
 import { getCart, setCart, saveCart } from "./cartState.js";
 import { estaLogueado, usuarioActual } from "./auth.js";
@@ -8,8 +9,9 @@ function escapar(str) {
 
 const GASTOS_ENVIO = 4.90;
 
-export function renderizarCarrito() {
-    const carrito = getCart();
+// Convertimos a async porque obtener los datos del carrito puede requerir consultar a Flask
+export async function renderizarCarrito() {
+    const carrito = await getCart(); // ← Ahora lleva 'await'
     const contenedorProductos = document.querySelector('.productos-carrito');
     const resumenSubtotal = document.getElementById('subtotal-valor');
     const precioTotal = document.getElementById('total-valor');
@@ -30,13 +32,15 @@ export function renderizarCarrito() {
     let totalAcumulado = 0;
 
     carrito.forEach(producto => {
+        // Adaptación técnica: la API puede devolver 'producto_id' o 'id'
+        const idProducto = producto.id || producto.producto_id;
         const subtotalProducto = parseFloat(producto.precio) * producto.cantidad;
         totalAcumulado += subtotalProducto;
 
         let rutaImagen = producto.imagen || producto.img || '';
 
         contenedorProductos.innerHTML += `
-            <div class="tarjeta-producto-carrito" data-id="${escapar(producto.id)}">
+            <div class="tarjeta-producto-carrito" data-id="${escapar(idProducto)}">
                 <img src="${escapar(rutaImagen)}" alt="${escapar(producto.productName)}" class="img-producto-carrito">
                 <div class="info-producto-carrito">
                     <h3>${escapar(producto.productName)}</h3>
@@ -64,51 +68,75 @@ export function renderizarCarrito() {
     gestionarBotonPago();
 }
 
-function gestionarBotonPago() {
+async function gestionarBotonPago() {
     const btnPagar = document.querySelector('.btn-pagar');
     if (!btnPagar) return;
-    const vacio = getCart().length === 0;
+    const carrito = await getCart();
+    const vacio = carrito.length === 0;
     btnPagar.disabled = vacio;
     btnPagar.style.opacity = vacio ? '0.5' : '1';
     btnPagar.style.cursor = vacio ? 'not-allowed' : 'pointer';
 }
 
 function asignarEventosBotones() {
+    // ➕ Botón Más Cantidad
     document.querySelectorAll('.btn-mas').forEach(boton => {
-        boton.onclick = (e) => {
-            const carrito = getCart();
+        boton.onclick = async (e) => {
+            const carrito = await getCart();
             const tarjeta = e.target.closest('.tarjeta-producto-carrito');
             const id = tarjeta.dataset.id;
-            const producto = carrito.find(item => item.id == id);
+            const producto = carrito.find(item => (item.id || item.producto_id) == id);
+            
             if (producto) {
                 producto.cantidad++;
+                if (estaLogueado()) {
+                    try {
+                        // Sincronizamos con el endpoint PUT /api/carrito/<id> de Flask
+                        await api.updateCarrito(id, { cantidad: producto.cantidad });
+                    } catch (err) { console.error("Error al actualizar cantidad en el servidor:", err); }
+                }
                 guardarYRefrescar();
             }
         };
     });
 
+    // ➖ Botón Menos Cantidad
     document.querySelectorAll('.btn-menos').forEach(boton => {
-        boton.onclick = (e) => {
-            const carrito = getCart();
+        boton.onclick = async (e) => {
+            const carrito = await getCart();
             const tarjeta = e.target.closest('.tarjeta-producto-carrito');
             const id = tarjeta.dataset.id;
-            const producto = carrito.find(item => item.id == id);
+            const producto = carrito.find(item => (item.id || item.producto_id) == id);
+            
             if (producto && producto.cantidad > 1) {
                 producto.cantidad--;
+                if (estaLogueado()) {
+                    try {
+                        // Sincronizamos con el endpoint PUT /api/carrito/<id> de Flask
+                        await api.updateCarrito(id, { cantidad: producto.cantidad });
+                    } catch (err) { console.error("Error al restar cantidad en el servidor:", err); }
+                }
                 guardarYRefrescar();
             }
         };
     });
 
+    // 🗑️ Botón Eliminar Producto
     document.querySelectorAll('.btn-eliminar').forEach(boton => {
-        boton.onclick = (e) => {
-            let carrito = getCart();
+        boton.onclick = async (e) => {
+            let carrito = await getCart();
             const tarjeta = e.target.closest('.tarjeta-producto-carrito');
             const id = tarjeta.dataset.id;
-            const producto = carrito.find(item => item.id == id);
+            const producto = carrito.find(item => (item.id || item.producto_id) == id);
 
             if (confirm(`¿Seguro que deseas quitar "${producto.productName}" de tu cesta?`)) {
-                carrito = carrito.filter(item => item.id != id);
+                if (estaLogueado()) {
+                    try {
+                        // Sincronizamos con el endpoint DELETE /api/carrito/<id> de Flask
+                        await api.deleteCarrito(id);
+                    } catch (err) { console.error("Error al eliminar producto en el servidor:", err); }
+                }
+                carrito = carrito.filter(item => (item.id || item.producto_id) != id);
                 setCart(carrito);
                 guardarYRefrescar();
             }
@@ -122,6 +150,7 @@ function guardarYRefrescar() {
     actualizarContadorNav();
 }
 
+// Vinculación de botones del DOM
 const btnPagar = document.querySelector('.btn-pagar');
 if (btnPagar) {
     btnPagar.onclick = abrirCheckout;
@@ -134,20 +163,13 @@ const formView = document.getElementById('checkout-form-view');
 const successView = document.getElementById('checkout-success-view');
 const successNombre = document.getElementById('success-nombre');
 
-if (closeBtn) {
-    closeBtn.onclick = cerrarCheckout;
-}
+if (closeBtn) { closeBtn.onclick = cerrarCheckout; }
+if (overlay) { overlay.onclick = (e) => { if (e.target === overlay) cerrarCheckout(); }; }
+if (form) { form.onsubmit = manejarEnvio; }
 
-if (overlay) {
-    overlay.onclick = (e) => { if (e.target === overlay) cerrarCheckout(); };
-}
-
-if (form) {
-    form.onsubmit = manejarEnvio;
-}
-
-function abrirCheckout() {
-    if (!overlay || getCart().length === 0) return;
+async function abrirCheckout() {
+    const carrito = await getCart();
+    if (!overlay || carrito.length === 0) return;
 
     if (!estaLogueado()) {
         window.location.href = 'login.html?redirect=carrito.html';
@@ -173,7 +195,8 @@ function cerrarCheckout() {
     document.body.style.overflow = '';
 }
 
-function manejarEnvio(e) {
+// 📦 SUBMIT: Finalizar la compra creando el pedido real en la Base de Datos
+async function manejarEnvio(e) {
     e.preventDefault();
 
     const nombre = document.getElementById('checkout-nombre').value.trim();
@@ -182,43 +205,33 @@ function manejarEnvio(e) {
 
     let valido = true;
 
-    if (!nombre) {
-        marcarError('checkout-nombre', 'El nombre es obligatorio');
-        valido = false;
-    }
-    if (!email) {
-        marcarError('checkout-email', 'El correo es obligatorio');
-        valido = false;
-    }
-    if (!direccion) {
-        marcarError('checkout-direccion', 'La dirección es obligatoria');
-        valido = false;
-    }
+    if (!nombre) { marcarError('checkout-nombre', 'El nombre es obligatorio'); valido = false; }
+    if (!email) { marcarError('checkout-email', 'El correo es obligatorio'); valido = false; }
+    if (!direccion) { marcarError('checkout-direccion', 'La dirección es obligatoria'); valido = false; }
 
     if (!valido) return;
 
-    successNombre.textContent = nombre;
-    formView.style.display = 'none';
-    successView.style.display = 'block';
+    try {
+        // Enviar pedido real a la API de Flask en Docker
+        await api.crearPedido({
+            direccion_envio: direccion
+        });
 
-    const carrito = getCart();
-    const total = carrito.reduce((sum, p) => sum + parseFloat(p.precio) * p.cantidad, 0);
-    const pedidos = JSON.parse(localStorage.getItem('pedidos') || '[]');
-    pedidos.unshift({
-        id: Date.now().toString(),
-        fecha: new Date().toLocaleDateString('es-ES'),
-        nombre,
-        email,
-        direccion,
-        productos: carrito.map(p => ({ nombre: p.productName, cantidad: p.cantidad, precio: p.precio })),
-        total: (total + GASTOS_ENVIO).toFixed(2)
-    });
-    localStorage.setItem('pedidos', JSON.stringify(pedidos));
+        successNombre.textContent = nombre;
+        formView.style.display = 'none';
+        successView.style.display = 'block';
 
-    setTimeout(() => {
+        // Limpiamos el carrito local al completarse con éxito
         localStorage.removeItem('carrito');
-        window.location.href = '../index.html';
-    }, 2000);
+
+        setTimeout(() => {
+            window.location.href = '../index.html';
+        }, 2000);
+
+    } catch (error) {
+        console.error("No se pudo crear el pedido en el servidor:", error);
+        alert(error.message || 'Error al procesar el pedido con el servidor.');
+    }
 }
 
 function marcarError(inputId, msg) {

@@ -1,7 +1,7 @@
 /* =========================================================
    1. IMPORTACIONES (Traemos solo los jefes de sección)
 ========================================================= */
-import { obtenerDatos } from "./modules/api.js";
+import { api } from "./modules/api.js";
 import { cargarComponentes, mostrarCategorias, mostrarMasVisitados, inicializarVolverArriba } from "./modules/ui.js";
 import { cargarSeccionProductos, cargarSeccionDetalle } from "./modules/productos.js";
 import { actualizarContadorNav, actualizarNavSesion, inicializarBusqueda, inicializarEnlacesPendientes } from "./modules/nav.js";
@@ -20,22 +20,35 @@ async function prepararPaginaComun() {
     await cargarComponentes('footer-placeholder', '../assets/componentes/footer.html');
 
     // 🌟 Llamamos al contador una vez que el HTML del Nav ya se ha incrustado
-    actualizarContadorNav();
+    await actualizarContadorNav();
 }
 
 // Carga las categorías y favoritos del Inicio
 async function inicializarPagina() {
-    const datos = await obtenerDatos('../data/db.json');   
-    if (datos) {
-        if (datos.mosaico) mostrarCategorias(datos.mosaico, 'categoria-container');
-        if (datos.productos) mostrarMasVisitados(datos.productos, 'favoritos-container');
+    try {
+        // Pedimos los datos reales al backend usando la nueva API
+        const productos = await api.getProductos();
+        const categorias = await api.getCategorias();   
+
+        // Si tenemos categorías desde el backend, las mostramos en el mosaico
+        if (categorias) {
+            mostrarCategorias(categorias, 'categoria-container');
+        }
+        
+        // Si tenemos productos, mostramos los primeros en la sección de favoritos/más visitados
+        if (productos) {
+            mostrarMasVisitados(productos, 'favoritos-container');
+        }
+    } catch (error) {
+        console.error("Error al cargar la página de inicio desde la API:", error);
     }
 }
 
 /* =========================================================
    3. CONTROL DE EJECUCIÓN (Enrutador por URL)
 ========================================================= */
-prepararPaginaComun().then(() => {
+prepararPaginaComun().then(async () => {
+    await actualizarContadorNav();
     actualizarNavSesion();
     inicializarBusqueda();
     inicializarEnlacesPendientes();

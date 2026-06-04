@@ -1,40 +1,44 @@
-const USUARIOS_KEY = 'usuarios';
+import { api } from "./api.js"; // ← Importamos el asistente inteligente de la API
+
 const SESION_KEY = 'sesion';
 
-function getUsuarios() {
-    return JSON.parse(localStorage.getItem(USUARIOS_KEY)) || [];
-}
-
-function saveUsuarios(usuarios) {
-    localStorage.setItem(USUARIOS_KEY, JSON.stringify(usuarios));
-}
-
-export function registrarUsuario(nombre, email, password) {
-    const usuarios = getUsuarios();
-    if (usuarios.find(u => u.email === email)) {
-        return { exito: false, error: 'Este correo ya está registrado' };
+// =========================================================
+// 🔑 6.2 FUNCIONES CONECTADAS AL BACKEND (JWT)
+// =========================================================
+export async function registrarUsuario(nombre, email, password) {
+    try {
+        // Llamamos al backend usando el objeto oficial de OpenCode
+        const respuesta = await api.register({ nombre, email, password });
+        return { exito: true, datos: respuesta };
+    } catch (error) {
+        return { exito: false, error: error.message || 'Error al registrar el usuario' };
     }
-    const nuevo = { id: Date.now().toString(), nombre, email, password };
-    usuarios.push(nuevo);
-    saveUsuarios(usuarios);
-    return { exito: true };
 }
 
-export function iniciarSesion(email, password) {
-    const usuarios = getUsuarios();
-    const usuario = usuarios.find(u => u.email === email && u.password === password);
-    if (!usuario) {
-        return { exito: false, error: 'Email o contraseña incorrectos' };
+export async function iniciarSesion(email, password) {
+    try {
+        // Enviamos las credenciales al endpoint /auth/login de Flask
+        const respuesta = await api.login({ email, password });
+        
+        // El backend nos devuelve un token JWT y los datos del usuario
+        // Guardamos el token por separado para que request() lo use automáticamente
+        localStorage.setItem('token', respuesta.token);
+
+        // Guardamos los datos básicos del usuario para los menús
+        localStorage.setItem(SESION_KEY, JSON.stringify({
+            userId: respuesta.usuario.id,
+            nombre: respuesta.usuario.nombre,
+            email: respuesta.usuario.email
+        }));
+
+        return { exito: true };
+    } catch (error) {
+        return { exito: false, error: error.message || 'Email o contraseña incorrectos' };
     }
-    localStorage.setItem(SESION_KEY, JSON.stringify({
-        userId: usuario.id,
-        nombre: usuario.nombre,
-        email: usuario.email
-    }));
-    return { exito: true };
 }
 
 export function cerrarSesion() {
+    localStorage.removeItem('token'); // ← Limpiamos el token de seguridad
     localStorage.removeItem(SESION_KEY);
 }
 
@@ -44,9 +48,12 @@ export function usuarioActual() {
 }
 
 export function estaLogueado() {
-    return !!localStorage.getItem(SESION_KEY);
+    return !!localStorage.getItem('token'); // ← Si hay token, es que inició sesión de verdad
 }
 
+// =========================================================
+// 🎛️ MANEJO DE FORMULARIOS DE LA INTERFAZ
+// =========================================================
 function marcarErrorCampo(inputId, msg) {
     const input = document.getElementById(inputId);
     if (!input) return;
@@ -62,7 +69,7 @@ export function inicializarLogin() {
     const form = document.querySelector('.formulario-login');
     if (!form) return;
 
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
         e.preventDefault();
 
         const email = document.getElementById('email').value.trim();
@@ -76,7 +83,8 @@ export function inicializarLogin() {
         if (!password) { marcarErrorCampo('password', 'La contraseña es obligatoria'); valido = false; }
         if (!valido) return;
 
-        const result = iniciarSesion(email, password);
+        // Llamamos a la función asíncrona conectada al backend con await
+        const result = await iniciarSesion(email, password);
         if (result.exito) {
             const params = new URLSearchParams(window.location.search);
             const redirect = params.get('redirect') || './carrito.html';
@@ -143,7 +151,7 @@ export function inicializarRegistro() {
     const form = document.querySelector('.formulario-login');
     if (!form) return;
 
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
         e.preventDefault();
 
         const nombre = document.getElementById('nombre').value.trim();
@@ -173,9 +181,9 @@ export function inicializarRegistro() {
         }
         if (!valido) return;
 
-        const result = registrarUsuario(nombre, email, password);
+        const result = await registrarUsuario(nombre, email, password);
         if (result.exito) {
-            iniciarSesion(email, password);
+           await iniciarSesion(email, password);
             window.location.href = './carrito.html';
         } else {
             marcarErrorCampo('email', result.error);

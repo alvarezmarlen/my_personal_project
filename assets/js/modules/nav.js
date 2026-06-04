@@ -6,8 +6,8 @@ function escapar(str) {
   return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#039;');
 }
 
-export function actualizarContadorNav() {
-    const carrito = getCart();
+export async function actualizarContadorNav() {
+    const carrito = await getCart();
     const totalProductos = carrito.reduce((acumulador, producto) => acumulador + producto.cantidad, 0);
 
     const contadorBadge = document.querySelector('.contador-carrito');
