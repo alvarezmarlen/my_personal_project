@@ -6,6 +6,10 @@
   font-family: Montserrat, sans-serif;
 }
 
+html {
+  scrollbar-gutter: stable;
+}
+
 :root {
   --primary:#f8d9d6;
   --black:#000000;

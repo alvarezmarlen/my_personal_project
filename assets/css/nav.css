@@ -21,6 +21,10 @@
   --color :#dc3545;
 }
 
+#nav-placeholder {
+  min-height: 130px;
+}
+
 /* CONTENEDOR PRINCIPAL */
 #header {
     background: #fff;
