@@ -64,4 +64,25 @@ export const api = {
 
     // Contacto
     enviarContacto: (d) => request('/contacto', { method: 'POST', body: JSON.stringify(d) }),
+
+    // Admin
+    adminGet: (url) => request(`/admin${url}`),
+    adminPost: (url, d) => request(`/admin${url}`, { method: 'POST', body: JSON.stringify(d) }),
+    adminPut: (url, d) => request(`/admin${url}`, { method: 'PUT', body: JSON.stringify(d) }),
+    adminDelete: (url) => request(`/admin${url}`, { method: 'DELETE' }),
+    adminUpload: async (file) => {
+        const token = localStorage.getItem('token');
+        const formData = new FormData();
+        formData.append('imagen', file);
+        const res = await fetch(`http://localhost:5000/api/admin/upload`, {
+            method: 'POST',
+            headers: { 'Authorization': `Bearer ${token}` },
+            body: formData
+        });
+        if (!res.ok) {
+            const err = await res.json().catch(() => ({}));
+            throw new Error(err.message || 'Error al subir imagen');
+        }
+        return res.json();
+    }
 };

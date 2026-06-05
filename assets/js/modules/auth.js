@@ -28,7 +28,8 @@ export async function iniciarSesion(email, password) {
         localStorage.setItem(SESION_KEY, JSON.stringify({
             userId: respuesta.usuario.id,
             nombre: respuesta.usuario.nombre,
-            email: respuesta.usuario.email
+            email: respuesta.usuario.email,
+            is_admin: respuesta.usuario.is_admin
         }));
 
         // Migrar carrito anónimo (localStorage) al servidor
@@ -67,6 +68,11 @@ export function estaLogueado() {
     return !!localStorage.getItem('token'); // ← Si hay token, es que inició sesión de verdad
 }
 
+export function esAdmin() {
+    const sesion = usuarioActual();
+    return sesion && sesion.is_admin === true;
+}
+
 // =========================================================
 // 🎛️ MANEJO DE FORMULARIOS DE LA INTERFAZ
 // =========================================================
@@ -103,7 +109,7 @@ export function inicializarLogin() {
         const result = await iniciarSesion(email, password);
         if (result.exito) {
             const params = new URLSearchParams(window.location.search);
-            const redirect = params.get('redirect') || './carrito.html';
+            const redirect = params.get('redirect') || (esAdmin() ? '../pages/admin.html' : '../index.html');
             window.location.href = redirect;
         } else {
             marcarErrorCampo('email', result.error);
@@ -200,7 +206,7 @@ export function inicializarRegistro() {
         const result = await registrarUsuario(nombre, email, password);
         if (result.exito) {
            await iniciarSesion(email, password);
-            window.location.href = './carrito.html';
+           window.location.href = esAdmin() ? '../pages/admin.html' : '../index.html';
         } else {
             marcarErrorCampo('email', result.error);
         }

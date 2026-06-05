@@ -77,9 +77,9 @@ if (pagina === 'index.html') {
     inicializarContacto();
 } else if (pagina === 'cuenta.html') {
     inicializarCuenta();
-} else if (['nosotros.html'].includes(pagina)) {
+} else if (['nosotros.html', 'admin.html'].includes(pagina)) {
 } else {
-    const rutasValidas = ['index.html', 'productos.html', 'detalle.html', 'carrito.html', 'login.html', 'registro.html', 'contacto.html', 'cuenta.html', 'nosotros.html'];
+    const rutasValidas = ['index.html', 'productos.html', 'detalle.html', 'carrito.html', 'login.html', 'registro.html', 'contacto.html', 'cuenta.html', 'nosotros.html', 'admin.html'];
     if (!rutasValidas.includes(pagina)) {
         window.location.href = window.location.pathname.includes('/pages/') ? './404.html' : './pages/404.html';
     }

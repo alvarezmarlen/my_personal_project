@@ -1,5 +1,5 @@
 import { getCart } from "./cartState.js";
-import { usuarioActual, cerrarSesion } from "./auth.js";
+import { usuarioActual, cerrarSesion, esAdmin } from "./auth.js";
 import { mostrarToast } from "./ui.js";
 
 function escapar(str) {
@@ -40,6 +40,7 @@ export function actualizarNavSesion() {
                 <img src="../assets/img/logo-iconos/icono-cuenta.jpg" alt="Usuario">
                 <span class="title">${escapar(usuario.nombre)}</span>
             </a>
+            ${esAdmin() ? '<a href="../pages/admin.html" style="font-size:0.75rem;color:#ae40f0;text-decoration:none;font-weight:600;">Panel Admin</a>' : ''}
             <a href="#" id="logout-link" style="font-size:0.75rem;color:#999;text-decoration:none;">Cerrar sesión</a>
         `;
 
