@@ -2,7 +2,7 @@
 // 🔗 CONFIGURACIÓN CENTRALIZADA DE LA API (OFICIAL)
 // ==========================================
 
-const API_BASE = "https://sumi-backend-7439.onrender.com/api/";
+const API_BASE = "https://sumi-backend-7439.onrender.com/api";
 
 async function request(url, opciones = {}) {
     const token = localStorage.getItem('token');
