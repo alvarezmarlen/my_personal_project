@@ -146,3 +146,41 @@
   font-size: 0.9rem;
   color: #777777;
 }
+
+
+/* =========================================================
+   REGLAS RESPONSIVE - DETALLE DE PRODUCTO
+========================================================= */
+@media (max-width: 768px) {
+    #contenedor-detalle {
+        margin: 20px auto;
+        padding: 0 15px;
+    }
+    .producto-detalle {
+        flex-direction: column; /* De fila pasa a columna vertical */
+        gap: 30px;              /* Reduce la separación exagerada */
+        align-items: center;
+    }
+    .producto-imagen, .producto-info {
+        width: 100%;            /* Ocupan todo el ancho disponible */
+    }
+    .producto-imagen img {
+        max-width: 100%;        /* Ajuste fluido de la imagen */
+        height: auto;
+    }
+    .producto-info {
+        padding-top: 0;         /* Elimina el desfase óptico */
+        text-align: center;     /* Centra los textos */
+    }
+    .producto-info h3 {
+        font-size: 1.8rem;
+    }
+    .producto-stock {
+        justify-content: center;
+    }
+    .btn-comprar {
+        align-self: center;     /* Centra el botón de compra */
+        width: 100%;            /* Más fácil de pulsar con el dedo */
+        max-width: 300px;
+    }
+}

@@ -216,14 +216,39 @@
   color: #2b181d;
 }
 
+
+
+
 /* 📱 Soporte Móvil */
+/* =========================================================
+   REGLAS RESPONSIVE - PÁGINA DE CONTACTO
+========================================================= */
 @media (max-width: 768px) {
-  .seccion-contacto-bloques {
-    flex-direction: column;
-    gap: 20px;
-  }
-  .grupo-input-doble {
-    flex-direction: column;
-    gap: 0;
-  }
+    #contenedor-contacto {
+        padding: 0 15px;
+        margin-bottom: 40px;
+    }
+    .categoria-cabecera h1 {
+        font-size: 1.5rem;
+    }
+    .seccion-contacto-bloques {
+        flex-direction: column; /* Apilado vertical */
+        gap: 25px;
+        margin-top: 25px;
+    }
+    .tarjeta-blanca {
+        padding: 25px 20px;
+    }
+    .grupo-input-doble {
+        flex-direction: column; /* Nombre y Apellido uno abajo del otro */
+        gap: 0; 
+    }
+    .iconos-redes {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    .red-enlace {
+        width: 100%; /* Botón de red social a ancho completo */
+        justify-content: center;
+    }
 }

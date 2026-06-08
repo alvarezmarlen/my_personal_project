@@ -300,3 +300,31 @@ transform: translateY(-7px); /* Sube un pelín más para dar más sensación de 
     padding: 0 10px;
 }
 
+/* =========================================================
+   REGLAS RESPONSIVE - PÁGINA DE INICIO (HOME)
+========================================================= */
+@media (max-width: 768px) {
+    .titulo-banner {
+        font-size: 1rem;
+        letter-spacing: 2px;
+        margin: -2rem 15px 0 15px;
+        padding: 10px 15px;
+    }
+    .mosaico-container a {
+        width: 100%; /* La tarjeta se amolda al ancho de la pantalla */
+        max-width: 340px; /* Evita que se deforme en pantallas intermedias */
+        height: 340px;
+    }
+    .etiqueta-contenedor {
+        min-width: 220px;
+        padding: 10px 15px;
+    }
+    .etiqueta-contenedor h3 {
+        font-size: 0.8rem;
+        letter-spacing: 1px;
+    }
+    .producto-mini {
+        width: 100%;
+        max-width: 280px;
+    }
+}

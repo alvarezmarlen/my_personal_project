@@ -188,3 +188,26 @@
 .spinner.visible {
     display: block;
 }
+
+
+/* =========================================================
+   REGLAS RESPONSIVE - CATÁLOGO DE PRODUCTOS
+========================================================= */
+@media (max-width: 992px) {
+    #container-productos {
+        grid-template-columns: repeat(2, 1fr); /* 2 columnas en pantallas medianas */
+        padding: 30px 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    #container-productos {
+        grid-template-columns: 1fr; /* 1 sola columna en móviles pequeños */
+        padding: 20px 15px;
+    }
+    .filtros-bar {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 0 20px;
+    }
+}

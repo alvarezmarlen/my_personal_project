@@ -589,3 +589,71 @@ body {
     gap: 20px;
   }
 }
+
+
+/* =========================================================
+   REGLAS RESPONSIVE - CARRITO Y MODAL CHECKOUT
+========================================================= */
+@media (max-width: 768px) {
+    #contenedor-carrito {
+        grid-template-columns: 1fr; /* El resumen de compra baja al final */
+        padding: 30px 15px;
+        gap: 25px;
+    }
+    
+    .tarjeta-producto-carrito {
+        flex-direction: column; /* Tarjeta de producto en vertical */
+        gap: 15px;
+        text-align: center;
+        padding: 15px;
+    }
+    
+    .producto-info-principal {
+        flex-direction: column;
+    }
+    
+    .info-producto-carrito {
+        margin-left: 0;
+    }
+    
+    .cantidad-control {
+        margin: 10px 0;
+        justify-content: center;
+        width: 120px;
+        align-self: center;
+    }
+    
+    .subtotal-eliminar {
+        width: 100%;
+        justify-content: space-between;
+        border-top: 1px solid #f5eaea;
+        padding-top: 15px;
+    }
+    
+    .precio-subtotal {
+        text-align: left;
+    }
+
+    /* 🔥 CORRECCIÓN DEL MODAL FLOTANTE DE PAGO */
+    .checkout-modal {
+        width: 95%;
+        padding: 30px 20px 20px 20px;
+        max-height: 90vh; /* Controla que no se desborde el alto */
+        overflow-y: auto;  /* Permite scroll dentro del cuadro de pago */
+    }
+    
+    .checkout-form-grid {
+        grid-template-columns: 1fr; /* Datos de envío arriba, pasarela abajo */
+        gap: 20px;
+    }
+}
+
+@media (max-width: 640px) {
+    .checkout-modal h2 {
+        font-size: 1.1rem;
+    }
+    .checkout-col-header {
+        font-size: 0.95rem;
+        margin-bottom: 12px;
+    }
+}

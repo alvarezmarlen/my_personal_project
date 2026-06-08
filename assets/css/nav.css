@@ -284,3 +284,34 @@ body {
         max-width: 100% !important;
     }
 }
+
+
+/* =========================================================
+   REGLAS RESPONSIVE - BARRA DE NAVEGACIÓN
+========================================================= */
+@media (max-width: 768px) {
+    .header-top {
+        flex-direction: column; /* Apila logo, buscador y botones en vertical */
+        gap: 15px;
+        padding: 15px;
+    }
+    .logo-header {
+        margin-left: 0 !important; /* Quita el empuje lateral izquierdo */
+        flex: none;
+        text-align: center;
+    }
+    .header-right {
+        margin-right: 0 !important; /* Evita que el carrito se salga por la derecha */
+        justify-content: center;
+        width: 100%;
+        gap: 25px;
+    }
+    .header-nav ul {
+        margin-left: 0 !important;
+        justify-content: center;
+        width: 100%;
+    }
+    .header-nav ul li .contact {
+        margin-left: 0 !important;
+    }
+}

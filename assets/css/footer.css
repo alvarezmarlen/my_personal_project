@@ -111,3 +111,19 @@ footer{
   font-style: normal;
   letter-spacing: 1px;
 }
+
+
+/* =========================================================
+   REGLAS RESPONSIVE - PIE DE PÁGINA (FOOTER)
+========================================================= */
+@media (max-width: 768px) {
+    footer {
+        grid-template-columns: 1fr; /* Una sección debajo de la otra */
+        text-align: center;
+        padding: 20px;
+    }
+    .sobre-nosotros, .informacion-legal {
+        padding-top: 1rem;
+        margin-bottom: 1rem;
+    }
+}

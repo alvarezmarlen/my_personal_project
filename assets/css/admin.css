@@ -443,33 +443,50 @@ body {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* --- Responsive --- */
+
+
+
+
+/* =========================================================
+   REGLAS RESPONSIVE - PANEL DE ADMINISTRACIÓN
+========================================================= */
 @media (max-width: 768px) {
-  #admin-dashboard {
+  body, #admin-dashboard {
     flex-direction: column;
   }
 
   .admin-sidebar {
     width: 100%;
-    padding: 16px 0;
+    padding: 16px 0 12px 0;
+    border-bottom: 2px solid rgba(248, 217, 214, 0.1);
   }
 
   .admin-sidebar h2 {
-    padding: 0 16px 16px;
+    padding: 0 16px 12px;
     margin-bottom: 12px;
+    text-align: center;
+    font-size: 1rem;
   }
 
+  /* Menú de pestañas con scroll horizontal fluido */
   .admin-nav {
     flex-direction: row;
-    padding: 0 12px;
-    gap: 6px;
+    padding: 0 16px;
+    gap: 8px;
+    overflow-x: auto;
+    white-space: nowrap;
+    scrollbar-width: none;
+  }
+
+  .admin-nav::-webkit-scrollbar {
+    display: none;
   }
 
   .admin-tab {
-    flex: 1;
+    flex: 0 0 auto; /* No se deforman los textos de las pestañas */
+    font-size: 0.85rem;
+    padding: 8px 14px;
     justify-content: center;
-    font-size: 0.8rem;
-    padding: 10px 8px;
   }
 
   .admin-sidebar-footer {
@@ -478,51 +495,80 @@ body {
 
   .admin-content {
     padding: 20px 16px;
+    width: 100%;
   }
 
   .admin-header-row {
     flex-direction: column;
-    gap: 12px;
+    gap: 16px;
     align-items: stretch;
+    text-align: center;
   }
 
-  .admin-table th,
-  .admin-table td {
-    padding: 10px 12px;
+  .btn-crear {
+    width: 100%;
+    text-align: center;
+  }
+
+  /* Envoltura para que las tablas no rompan el layout del teléfono */
+  .admin-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 10px;
+  }
+
+  .admin-table th, .admin-table td {
+    padding: 12px 10px;
     font-size: 0.8rem;
+  }
+
+  .admin-table .acciones {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .admin-table .acciones .btn-admin {
+    width: 100%;
+    text-align: center;
+    padding: 4px 8px;
+  }
+
+  .admin-modal-content {
+    width: 95%;
+    padding: 10px;
   }
 
   .form-grid {
     grid-template-columns: 1fr;
+    gap: 12px;
   }
 
   .form-imagen-row {
     flex-direction: column;
+    gap: 10px;
   }
 
   .form-imagen-row input[type="file"] {
     max-width: 100%;
   }
 
-  .admin-toast {
-    left: 16px;
-    right: 16px;
-    bottom: 16px;
-    text-align: center;
+  .form-acciones {
+    flex-direction: column-reverse;
+    gap: 10px;
+  }
+
+  .form-acciones .btn-admin {
+    width: 100%;
   }
 }
 
 @media (max-width: 480px) {
-  .admin-table {
-    font-size: 0.75rem;
-  }
-
   .admin-tab {
-    font-size: 0.72rem;
-    padding: 8px 4px;
+    font-size: 0.8rem;
+    padding: 6px 10px;
   }
-
   .admin-tab i {
-    display: none;
+    display: none; /* Oculta iconos en pantallas mini para leer mejor el texto */
   }
 }
