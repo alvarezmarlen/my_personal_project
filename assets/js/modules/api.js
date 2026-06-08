@@ -2,7 +2,7 @@
 // 🔗 CONFIGURACIÓN CENTRALIZADA DE LA API (OFICIAL)
 // ==========================================
 
-const API_BASE = 'http://localhost:5000/api';
+const API_BASE = 'https://sumi-backend-7439.onrender.com/api/';
 
 async function request(url, opciones = {}) {
     const token = localStorage.getItem('token');
@@ -74,7 +74,7 @@ export const api = {
         const token = localStorage.getItem('token');
         const formData = new FormData();
         formData.append('imagen', file);
-        const res = await fetch(`http://localhost:5000/api/admin/upload`, {
+        const res = await fetch(`https://sumi-backend-7439.onrender.com/api/admin/upload`, {
             method: 'POST',
             headers: { 'Authorization': `Bearer ${token}` },
             body: formData
