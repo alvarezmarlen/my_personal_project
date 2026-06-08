@@ -287,31 +287,39 @@ body {
 
 
 /* =========================================================
-   REGLAS RESPONSIVE - BARRA DE NAVEGACIÓN
+   REGLAS RESPONSIVE - BARRA DE NAVEGACIÓN (MODIFICADO)
 ========================================================= */
 @media (max-width: 768px) {
-    .header-top {
-        flex-direction: column; /* Apila logo, buscador y botones en vertical */
-        gap: 15px;
-        padding: 15px;
+    /* 1. Ocultamos los bloques de Envíos y Pagos con sus iconos */
+    .info-envios, 
+    .info-pagos,
+    .header-info-item,
+    [class*="envias"], 
+    [class*="pago"] { 
+        display: none !important; 
     }
+
+    /* 2. Ocultamos la barra de buscar */
+    .buscar-form,
+    .header-search,
+    .search-box,
+    input[type="search"] {
+        display: none !important;
+    }
+
+    /* 3. Evitamos que el logo se descentre */
     .logo-header {
-        margin-left: 0 !important; /* Quita el empuje lateral izquierdo */
-        flex: none;
-        text-align: center;
+        margin-left: 0 !important;
+        text-align: left !important;
     }
+
+    /* 4. Forzamos a que el bloque de iniciar sesión y cesta suba al lado del logo */
     .header-right {
-        margin-right: 0 !important; /* Evita que el carrito se salga por la derecha */
-        justify-content: center;
-        width: 100%;
-        gap: 25px;
-    }
-    .header-nav ul {
-        margin-left: 0 !important;
-        justify-content: center;
-        width: 100%;
-    }
-    .header-nav ul li .contact {
-        margin-left: 0 !important;
+        margin-right: 0 !important;
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        gap: 15px !important;
+        width: auto !important;
     }
 }
