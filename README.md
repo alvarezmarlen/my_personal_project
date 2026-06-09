@@ -1,6 +1,10 @@
 # Store Sumi.chh — Frontend
 
+> Proyecto personal — tienda virtual de bisutería artesanal desarrollada como trabajo final del bootcamp.
+
 Tienda virtual de bisutería artesanal construida con JavaScript vanilla (ES Modules) que se conecta a una API REST Flask para todas las operaciones: catálogo, autenticación, carrito, pedidos y administración.
+
+**🔗 Backend:** Puedes ver el código del backend aquí → [`conexion_bd/`](../conexion_bd/) *(Flask + PostgreSQL, API REST con autenticación JWT, Docker)*
 
 ## Tecnologías utilizadas
 
